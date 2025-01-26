@@ -1,6 +1,66 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:SRMAPP.Model"
+             xmlns:viewmodel="clr-namespace:SRMAPP.ViewModels"
              x:Class="SRMAPP.Views.AccountsPage"
+             x:DataType="viewmodel:AccountsListViewModel"
              Title="Accounts">
 
+    <ContentPage.BindingContext>
+        <viewmodel:AccountsListViewModel/>
+    </ContentPage.BindingContext>
+
+    <Grid RowDefinitions="2*, 0.5*">
+
+        <ListView ItemsSource="{Binding AccountList}"
+                  HasUnevenRows="False"
+                  RowHeight="150"
+                  Grid.Row="0"
+                  VerticalScrollBarVisibility="Always">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="model:Account">
+                    <ViewCell>
+                        <Border Padding="5"
+                                Margin="10"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                StrokeShape="RoundRectangle 10,10,10,10"
+                                StrokeThickness="3"
+                                Stroke="Black"
+                                WidthRequest="250"
+                                HeightRequest="100">
+
+                            <Grid RowDefinitions="*, *"
+                                  ColumnDefinitions="*, *">
+
+                                <Label Grid.Row="0"
+                                       Grid.Column="0"
+                                       Text="{Binding Name}"
+                                       VerticalOptions="Center"/>
+
+                                <Label Grid.Row="1"
+                                       Grid.Column="0"
+                                       Text="{Binding AccountSize, StringFormat='{0:C}'}"
+                                       VerticalOptions="Center"/>
+
+                                <Label Grid.Row="1"
+                                       Grid.Column="1"
+                                       Text="{Binding Risk, StringFormat='{0:P}'}"
+                                       HorizontalOptions="End"
+                                       VerticalOptions="Center"/>
+                            </Grid>
+                        </Border>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
+
+        <Button Margin="10"
+                Text="+"
+                Grid.Row="1"
+                HorizontalOptions="End"
+                VerticalOptions="Center"/>
+
+    </Grid>
 </ContentPage>

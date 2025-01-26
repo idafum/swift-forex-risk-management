@@ -2,20 +2,20 @@
 using System.Globalization;
 
 namespace SRMAPP.Model;
-public class Accounts
+public class Account
 {
-    private string Name;
-    private double AccountSize;
-    private double Risk;
+    public string Name { get; set; }
+    public double AccountSize { get; set; }
+    public double Risk { get; set; }
 
     //Dummy constructor
-    public Accounts()
+    public Account()
     {
         this.Name = "My Account";
         this.AccountSize = 1000;
         this.Risk = 1;
     }
-    public Accounts(string Name, double AccountSize, double Risk)
+    public Account(string Name, double AccountSize, double Risk)
     {
         this.Name = Name;
         this.AccountSize = AccountSize;
