@@ -10,6 +10,7 @@ and data-driven solution to manage risk and optimize their trading decisions.
 ## Features
 **1. Accounts**
 This feature will give users the opportunity to create a new and track their progress on an account.
+
 As a User I want to be able to create a new trading account.
   - As a User I want to be able to set the risk for an account.
   - As a User I want to be able to set the account name.
