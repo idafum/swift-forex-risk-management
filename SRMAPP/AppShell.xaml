@@ -1,15 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<Shell
-    x:Class="SRMAPP.AppShell"
-    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:SRMAPP.Views"
-    Shell.FlyoutBehavior="Flyout"
-    Title="SRMAPP">
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:views="clr-namespace:SRMAPP.Views"
+       x:Class="SRMAPP.AppShell"
+       Title="SRMAPP"
+       FlyoutHeaderBehavior="CollapseOnScroll">
 
-    <ShellContent
-        Title="My Accounts"
-        ContentTemplate="{DataTemplate local:AccountsPage}"
-        Route="AccountsPage"/>
+    <Shell.FlyoutHeaderTemplate>
+        <DataTemplate>
+            <Grid HeightRequest="150">
+                <Image Aspect="AspectFill"
+                       Source="logo.png"/>
+            </Grid>
+        </DataTemplate>
+    </Shell.FlyoutHeaderTemplate>
+
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent Title="Accounts"
+                      ContentTemplate="{DataTemplate views:AccountsPage}"/>
+        <ShellContent Title="Trades"
+                      ContentTemplate="{DataTemplate views:AccountsPage}"/>
+
+        <ShellContent Title="Overview"
+                      ContentTemplate="{DataTemplate views:AccountsPage}"/>
+    </FlyoutItem>
+
+    <ShellContent Title="About"
+                  ContentTemplate="{DataTemplate views:AccountsPage}"/>
 
 </Shell>
