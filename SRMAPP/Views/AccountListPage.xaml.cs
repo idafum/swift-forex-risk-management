@@ -1,7 +1,7 @@
 using SRMAPP.ViewModels;
 
 namespace SRMAPP.Views;
-public partial class AccountsPage : ContentPage
+public partial class AccountListPage : ContentPage
 {
     public AccountsPage()
     {
