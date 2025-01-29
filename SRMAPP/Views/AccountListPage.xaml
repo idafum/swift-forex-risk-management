@@ -14,7 +14,8 @@
                   RowHeight="150"
                   Grid.Row="0"
                   VerticalScrollBarVisibility="Always"
-                  SelectionMode="None">
+                  SelectionMode="None"
+                  Margin="10">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell x:DataType="model:Account">
@@ -84,12 +85,12 @@
 
         </ListView>
 
-        <Button Margin="
-                                        10"
+        <Button Margin="10"
                 Text="+"
                 Grid.Row="1"
                 HorizontalOptions="End"
-                VerticalOptions="Center"/>
+                VerticalOptions="Center"
+                Command="{Binding CreateAccountCommand}"/>
 
     </Grid>
 </ContentPage>
