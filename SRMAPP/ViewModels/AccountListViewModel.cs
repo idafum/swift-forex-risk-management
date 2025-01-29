@@ -1,25 +1,30 @@
-namespace SRMAPP.ViewModels;
 
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using SRMAPP.Model;
-public partial class AccountsListViewModel : ObservableObject
+using System.Collections.ObjectModel;
+using System.Windows.Input;
+
+namespace SRMAPP.ViewModels;
+public partial class AccountListViewModel : ObservableObject
 {
 
-    private List<Account> _accountList;
-
-    public List<Account> AccountList
+    public AccountListViewModel()
     {
-        get => _accountList;
-        set => SetProperty(ref _accountList, value);
+        AccountList = [];
+        AccountList.Add(new Account());
     }
 
-    public AccountsListViewModel()
-    {
-        _accountList = [];
-        //Initialize Accounts
-        AccountList.Add(new Account("FTMO 1", 10000, 0.02));
-        AccountList.Add(new Account("FTMO 2", 10000, 0.01));
-        AccountList.Add(new Account("FTMO 3", 10000, 0.01));
+    [ObservableProperty]
+    ObservableCollection<Account> accountList = [];
 
+    [RelayCommand]
+    void Delete(Account account)
+    {
+        Console.WriteLine("Executing Delete Command");
+        if (account != null)
+        {
+            AccountList.Remove(account);
+        }
     }
 }

@@ -1,15 +1,11 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:model="clr-namespace:SRMAPP.Model"
-             xmlns:viewmodel="clr-namespace:SRMAPP.ViewModels"
              xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
              x:Class="SRMAPP.Views.AccountListPage"
-             x:DataType="viewmodel:AccountsListViewModel"
-             Title="Accounts">
-
-    <ContentPage.BindingContext>
-        <viewmodel:AccountsListViewModel/>
-    </ContentPage.BindingContext>
+             Title="Accounts"
+             xmlns:model="clr-namespace:SRMAPP.Model"
+             xmlns:viewmodel="clr-namespace:SRMAPP.ViewModels"
+             x:DataType="viewmodel:AccountListViewModel">
 
     <Grid RowDefinitions="2*, 0.5*">
 
@@ -20,24 +16,26 @@
                   VerticalScrollBarVisibility="Always"
                   SelectionMode="None">
             <ListView.ItemTemplate>
-                <DataTemplate x:DataType="model:Account">
-                    <ViewCell>
+                <DataTemplate>
+                    <ViewCell x:DataType="model:Account">
                         <SwipeView ios:SwipeView.SwipeTransitionMode="Drag">
                             <SwipeView.LeftItems>
-                                <SwipeItems>
-                                    <SwipeItem Text="Delete"
-                                               BackgroundColor="red"
-                                               Invoked="OnDeleteSwipeItemInvoked"/>
+                                <SwipeItems Mode="Reveal">
+                                    <SwipeItem
+                                        Text="Delete"
+                                        BackgroundColor="red"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:AccountListViewModel}}, Path=DeleteCommand}"
+                                        CommandParameter="{Binding .}"/>
                                 </SwipeItems>
                             </SwipeView.LeftItems>
 
-                            <SwipeView.RightItems>
+                            <!-- <SwipeView.RightItems>
                                 <SwipeItems>
                                     <SwipeItem Text="New Trade"
                                                BackgroundColor="Green"
                                                Invoked="OnTradeSwipeItemInvoked"/>
                                 </SwipeItems>
-                            </SwipeView.RightItems>
+                            </SwipeView.RightItems> -->
 
 
                             <Grid ColumnDefinitions="5*, 2*"
