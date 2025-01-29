@@ -3,6 +3,8 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using SRMAPP.Model;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace SRMAPP.ViewModels;
@@ -13,18 +15,34 @@ public partial class AccountListViewModel : ObservableObject
     {
         AccountList = [];
         AccountList.Add(new Account());
+        AccountList.Add(new Account());
+        AccountList.Add(new Account());
     }
 
     [ObservableProperty]
     ObservableCollection<Account> accountList = [];
 
+    /// <summary>
+    /// Delete an account from the account List View. 
+    /// </summary>
+    /// <param name="account"></param>
+    /// <returns></returns>
     [RelayCommand]
-    void Delete(Account account)
+    async Task Delete(Account account)
     {
-        Console.WriteLine("Executing Delete Command");
         if (account != null)
         {
-            AccountList.Remove(account);
+            var currentPage = Shell.Current;
+            if (currentPage != null)
+            {
+                bool answer = await Shell.Current.DisplayAlert("Confirm Delete", "Are you sure you want to delete this account?", "Yes", "No");
+                Debug.WriteLine("Answer: " + answer);
+
+                if (answer)
+                {
+                    AccountList.Remove(account);
+                }
+            }
         }
     }
 }
