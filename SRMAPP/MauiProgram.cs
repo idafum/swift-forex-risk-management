@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
+using SRMAPP.Popups;
 using SRMAPP.ViewModels;
 using SRMAPP.Views;
 
@@ -21,6 +22,7 @@ public static class MauiProgram
 
 		builder.Services.AddSingleton<AccountListPage>();
 		builder.Services.AddSingleton<AccountListViewModel>();
+		builder.Services.AddTransientPopup<CreateAccountPopup, CreateAccountViewModel>();
 
 
 #if DEBUG

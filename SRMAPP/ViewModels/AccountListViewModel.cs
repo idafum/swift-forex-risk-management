@@ -56,7 +56,7 @@ public partial class AccountListViewModel : ObservableObject
 
         //await Shell.Current.Navigation.PushModalAsync(new NavigationPage(new AccountCreationFormPage()));
         //Open the account creation popup,
-        var popup = new CreateAccountPopup();
+        var popup = new CreateAccountPopup(new CreateAccountViewModel());
         Shell.Current.ShowPopup(popup);
         // Account Name
         // Account Balance
