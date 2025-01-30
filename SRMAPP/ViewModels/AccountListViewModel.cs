@@ -1,4 +1,6 @@
 
+
+using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -14,13 +16,16 @@ using System.Windows.Input;
 namespace SRMAPP.ViewModels;
 public partial class AccountListViewModel : ObservableObject
 {
+    private readonly IPopupService popupService;
 
-    public AccountListViewModel()
+    public AccountListViewModel(IPopupService popupService)
     {
         AccountList = [];
+
         AccountList.Add(new Account());
         AccountList.Add(new Account());
         AccountList.Add(new Account());
+        this.popupService = popupService;
     }
 
     [ObservableProperty]
@@ -56,8 +61,9 @@ public partial class AccountListViewModel : ObservableObject
 
         //await Shell.Current.Navigation.PushModalAsync(new NavigationPage(new AccountCreationFormPage()));
         //Open the account creation popup,
-        var popup = new CreateAccountPopup(new CreateAccountViewModel());
-        Shell.Current.ShowPopup(popup);
+        //var popup = new CreateAccountPopup(new CreateAccountViewModel());
+        //Shell.Current.ShowPopup(popup);
+        this.popupService.ShowPopup<CreateAccountViewModel>();
         // Account Name
         // Account Balance
         // Account Risk
