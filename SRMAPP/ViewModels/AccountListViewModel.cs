@@ -1,8 +1,10 @@
 
+using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Maui.Controls;
 using SRMAPP.Model;
+using SRMAPP.Popups;
 using SRMAPP.Views;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -51,8 +53,11 @@ public partial class AccountListViewModel : ObservableObject
     [RelayCommand]
     async Task CreateAccount()
     {
-        await Shell.Current.Navigation.PushModalAsync(new AccountCreationFormPage());
+
+        //await Shell.Current.Navigation.PushModalAsync(new NavigationPage(new AccountCreationFormPage()));
         //Open the account creation popup,
+        var popup = new CreateAccountPopup();
+        Shell.Current.ShowPopup(popup);
         // Account Name
         // Account Balance
         // Account Risk
