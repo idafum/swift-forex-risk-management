@@ -5,11 +5,77 @@
                x:Class="SRMAPP.Popups.CreateAccountPopup"
                x:DataType="viewModels:AccountListViewModel">
 
-    <VerticalStackLayout Spacing="10">
-        <Label Text="New Account"/>
-        <!-- <Entry Text="{Binding Name}"/>
-        <Entry Text="{Binding AccountSize}"/>
-        <Entry Text="{Binding Risk}"/> -->
-        <Button Text="Ok"/>
-    </VerticalStackLayout>
+    <ContentView HeightRequest="400"
+                 WidthRequest="300"
+                 BackgroundColor="White"
+                 Padding="20">
+
+        <Border Stroke="#485B4646">
+
+            <Grid RowDefinitions="*,4*,*"
+                  ColumnDefinitions="*,4*,*">
+
+                <Label Grid.Row="0"
+                       Grid.Column="1"
+                       Text="New Account"
+                       FontSize="Header"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"/>
+
+                <VerticalStackLayout Grid.Row="1"
+                                     Grid.Column="1"
+                                     Spacing="8">
+                    <VerticalStackLayout>
+                        <Label Text="Name"/>
+                        <Entry x:Name="AccountNameEntry"
+                               Placeholder="FTMO 1"/>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout>
+                        <Label Text="Balance"/>
+                        <Entry x:Name="AccountBalanceEntry"
+                               Placeholder="10000"/>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout>
+                        <Label Text="Risk %"/>
+                        <Entry x:Name="RiskEntry"
+                               Placeholder="2"/>
+                    </VerticalStackLayout>
+
+                </VerticalStackLayout>
+
+                <Grid Grid.Row="2"
+                      Grid.Column="1"
+                      ColumnDefinitions="*,*">
+
+                    <ContentView Grid.Column="0"
+                                 HeightRequest="20"
+                                 WidthRequest="30">
+                        <Border Stroke="Black">
+                            <Label Text="x"
+                                   HorizontalTextAlignment="Center"
+                                   VerticalTextAlignment="Center"
+                                   TextColor="Red"/>
+                        </Border>
+                    </ContentView>
+
+                    <ContentView Grid.Column="1"
+                                 HeightRequest="20"
+                                 WidthRequest="30">
+                        <Border Stroke="Black">
+                            <Label Text="√"
+                                   HorizontalTextAlignment="Center"
+                                   VerticalTextAlignment="Center"
+                                   TextColor="Green"/>
+                        </Border>
+                    </ContentView>
+
+                </Grid>
+            </Grid>
+        </Border>
+    </ContentView>
+
+
 </toolkit:Popup>
