@@ -56,28 +56,27 @@
                       Grid.Column="1"
                       ColumnDefinitions="*,*">
 
-                    <ContentView Grid.Column="0"
-                                 HeightRequest="20"
-                                 WidthRequest="30">
-                        <Border Stroke="Black">
-                            <Label Text="x"
-                                   HorizontalTextAlignment="Center"
-                                   VerticalTextAlignment="Center"
-                                   TextColor="Red"/>
-                        </Border>
-                    </ContentView>
 
-                    <ContentView Grid.Column="1"
-                                 HeightRequest="20"
-                                 WidthRequest="30">
-                        <Border Stroke="Black">
-                            <Label Text="√"
-                                   HorizontalTextAlignment="Center"
-                                   VerticalTextAlignment="Center"
-                                   TextColor="Green"/>
-                        </Border>
-                    </ContentView>
+                    <Button Grid.Column="0"
+                            HeightRequest="10"
+                            WidthRequest="20"
+                            Text="x"
+                            FontSize="Medium"
+                            BorderColor="Black"
+                            BorderWidth="1"
+                            TextColor="Red"
+                            BackgroundColor="white"
+                            Padding="0"/>
 
+                    <Button Grid.Column="1"
+                            HeightRequest="10"
+                            WidthRequest="20"
+                            Text="√"
+                            FontSize="Medium"
+                            BorderColor="Black"
+                            BorderWidth="1"
+                            TextColor="Green"
+                            BackgroundColor="White"/>
                 </Grid>
             </Grid>
         </Border>
