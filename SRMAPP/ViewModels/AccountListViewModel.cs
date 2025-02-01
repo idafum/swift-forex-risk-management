@@ -9,6 +9,7 @@ using SRMAPP.Model;
 using SRMAPP.Popups;
 using SRMAPP.Views;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -29,7 +30,7 @@ public partial class AccountListViewModel : ObservableObject
     }
 
     [ObservableProperty]
-    ObservableCollection<Account> accountList = [];
+    ObservableCollection<Account> accountList;
 
     /// <summary>
     /// Delete an account from the account List View. 
@@ -41,6 +42,7 @@ public partial class AccountListViewModel : ObservableObject
     {
         if (account != null)
         {
+            Debug.WriteLine("Account is not null");
             var currentPage = Shell.Current;
             if (currentPage != null)
             {
@@ -56,10 +58,11 @@ public partial class AccountListViewModel : ObservableObject
     }
 
     [RelayCommand]
-    async Task CreateAccount()
+    private void CreateAccount()
     {
 
         this.popupService.ShowPopup<CreateAccountViewModel>();
+
         // Account Name
         // Account Balance
         // Account Risk

@@ -18,15 +18,15 @@
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent Title="Accounts"
                       ContentTemplate="{DataTemplate views:AccountListPage}"/>
-        <ShellContent Title="Trades"
+        <!-- <ShellContent Title="Trades"
                       ContentTemplate="{DataTemplate views:AccountListPage}"/>
 
         <ShellContent Title="Overview"
-                      ContentTemplate="{DataTemplate views:AccountListPage}"/>
+                      ContentTemplate="{DataTemplate views:AccountListPage}"/> -->
     </FlyoutItem>
 
-    <ShellContent Title="About"
-                  ContentTemplate="{DataTemplate views:AccountListPage}"/>
+    <!-- <ShellContent Title="About"
+                  ContentTemplate="{DataTemplate views:AccountListPage}"/> -->
 
     <Shell.FlyoutFooterTemplate>
         <DataTemplate>

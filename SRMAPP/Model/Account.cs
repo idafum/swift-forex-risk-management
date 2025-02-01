@@ -8,12 +8,9 @@ public class Account
     public double AccountSize { get; set; }
     public double Risk { get; set; }
 
-    //Dummy constructor
     public Account()
     {
-        this.Name = "My Account";
-        this.AccountSize = 1000;
-        this.Risk = 1;
+        Name = "FTM01";
     }
     public Account(string Name, double AccountSize, double Risk)
     {
