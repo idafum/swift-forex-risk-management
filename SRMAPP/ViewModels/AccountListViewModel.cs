@@ -57,11 +57,15 @@ public partial class AccountListViewModel : ObservableObject
         }
     }
 
+    /// <summary>
+    /// Open a Create account popup and get user input details for 
+    /// creation of a new account.
+    /// </summary>
     [RelayCommand]
-    private void CreateAccount()
+    private async Task CreateAccount()
     {
 
-        this.popupService.ShowPopup<CreateAccountViewModel>();
+        var acc = await this.popupService.ShowPopupAsync<CreateAccountViewModel>();
 
         // Account Name
         // Account Balance
