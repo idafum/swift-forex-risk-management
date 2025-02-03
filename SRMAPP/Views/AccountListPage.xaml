@@ -7,27 +7,28 @@
              xmlns:model="clr-namespace:SRMAPP.Model"
              xmlns:viewmodel="clr-namespace:SRMAPP.ViewModels"
              x:DataType="viewmodel:AccountListViewModel">
-
     <Grid RowDefinitions="2*, 0.5*">
 
-        <ListView ItemsSource="{Binding AccountList}"
+        <ListView x:Name="list"
+                  ItemsSource="{Binding AccountList}"
                   HasUnevenRows="False"
                   RowHeight="150"
                   Grid.Row="0"
                   VerticalScrollBarVisibility="Always"
                   SelectionMode="None"
                   Margin="10">
+
             <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell x:DataType="model:Account">
-                        <SwipeView ios:SwipeView.SwipeTransitionMode="Drag">
+
+                <DataTemplate x:DataType="model:Account">
+                    <ViewCell>
+                        <SwipeView>
                             <SwipeView.LeftItems>
                                 <SwipeItems Mode="Reveal">
                                     <SwipeItem
                                         Text="Delete"
                                         BackgroundColor="red"
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:AccountListViewModel}}, Path=DeleteCommand}"
-                                        CommandParameter="{Binding .}"/>
+                                        Invoked="OnDeleteAccount"/>
                                 </SwipeItems>
                             </SwipeView.LeftItems>
 

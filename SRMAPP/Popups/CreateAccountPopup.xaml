@@ -3,7 +3,8 @@
                xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
                xmlns:viewModels="clr-namespace:SRMAPP.ViewModels"
                x:Class="SRMAPP.Popups.CreateAccountPopup"
-               x:DataType="viewModels:AccountListViewModel">
+               x:DataType="viewModels:CreateAccountViewModel">
+
 
     <ContentView HeightRequest="400"
                  WidthRequest="300"
@@ -29,19 +30,25 @@
                     <VerticalStackLayout>
                         <Label Text="Name"/>
                         <Entry x:Name="AccountNameEntry"
-                               Placeholder="FTMO 1"/>
+                               Placeholder="5-10 characters"
+                               Text="{Binding NewAccount.Name}"
+                               Keyboard="Text"/>
                     </VerticalStackLayout>
 
                     <VerticalStackLayout>
                         <Label Text="Balance"/>
                         <Entry x:Name="AccountBalanceEntry"
-                               Placeholder="10000"/>
+                               Placeholder="10000"
+                               Text="{Binding NewAccount.AccountSize}"
+                               Keyboard="Numeric"/>
                     </VerticalStackLayout>
 
                     <VerticalStackLayout>
                         <Label Text="Risk %"/>
                         <Entry x:Name="RiskEntry"
-                               Placeholder="2"/>
+                               Placeholder="2"
+                               Text="{Binding NewAccount.Risk}"
+                               Keyboard="Numeric"/>
                     </VerticalStackLayout>
 
                 </VerticalStackLayout>
@@ -50,32 +57,32 @@
                       Grid.Column="1"
                       ColumnDefinitions="*,*">
 
-                    <ContentView Grid.Column="0"
-                                 HeightRequest="20"
-                                 WidthRequest="30">
-                        <Border Stroke="Black">
-                            <Label Text="x"
-                                   HorizontalTextAlignment="Center"
-                                   VerticalTextAlignment="Center"
-                                   TextColor="Red"/>
-                        </Border>
-                    </ContentView>
 
-                    <ContentView Grid.Column="1"
-                                 HeightRequest="20"
-                                 WidthRequest="30">
-                        <Border Stroke="Black">
-                            <Label Text="√"
-                                   HorizontalTextAlignment="Center"
-                                   VerticalTextAlignment="Center"
-                                   TextColor="Green"/>
-                        </Border>
-                    </ContentView>
+                    <Button Grid.Column="0"
+                            HeightRequest="10"
+                            WidthRequest="20"
+                            Text="x"
+                            FontSize="Medium"
+                            BorderColor="Black"
+                            BorderWidth="1"
+                            TextColor="Red"
+                            BackgroundColor="white"
+                            Padding="0"
+                            Command="{Binding CancelCommand}"/>
 
+                    <Button Grid.Column="1"
+                            HeightRequest="10"
+                            WidthRequest="20"
+                            Text="√"
+                            FontSize="Medium"
+                            BorderColor="Black"
+                            BorderWidth="1"
+                            TextColor="Green"
+                            BackgroundColor="White"
+                            Command="{Binding DoneCommand}"/>
                 </Grid>
             </Grid>
         </Border>
     </ContentView>
-
 
 </toolkit:Popup>
