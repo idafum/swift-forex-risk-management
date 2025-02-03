@@ -22,11 +22,26 @@ public partial class CreateAccountViewModel : ObservableObject
         this.popupService = popupService;
     }
 
-
-    [RelayCommand]
+    /// <summary>
+    /// This can only execute if the user entry is validate
+    /// </summary>
+    [RelayCommand(CanExecute = nameof(IsValidated))]
     private void Done()
     {
+        //validate
+        popupService.ClosePopup(newAccount);
+    }
 
+    /// <summary>
+    /// Is the account info valid
+    /// Account Name: Can be alphanumeric and 3 > x < 10 characters
+    /// Balance: Minimum of 10 dollars
+    /// Risk: Minumum risk of 0.5%
+    /// </summary>
+    /// <returns></returns>
+    private bool IsValidated()
+    {
+        return true;
     }
 
     /// <summary>

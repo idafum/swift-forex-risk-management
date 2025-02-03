@@ -58,8 +58,7 @@ public partial class AccountListViewModel : ObservableObject
     }
 
     /// <summary>
-    /// Open a Create account popup and get user input details for 
-    /// creation of a new account.
+    /// Open the Create account popup 
     /// </summary>
     [RelayCommand]
     private async Task CreateAccount()
@@ -67,8 +66,11 @@ public partial class AccountListViewModel : ObservableObject
 
         var acc = await this.popupService.ShowPopupAsync<CreateAccountViewModel>();
 
-        // Account Name
-        // Account Balance
-        // Account Risk
+        //Add new account to account list if valid.
+        if (acc != null && acc is Account newAccount)
+        {
+            AccountList.Add(newAccount);
+        }
+
     }
 }
