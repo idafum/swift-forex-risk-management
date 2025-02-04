@@ -6,3 +6,16 @@ This challenge is compounded by the time-sensitive nature of market execution an
 
 The Swift Risk Management Calculator (SRMC) aims to bridge this gap by providing traders with a simple, effective,
 and data-driven solution to manage risk and optimize their trading decisions.
+
+## Architecture
+This app uses a **3-Tier Architecture**
+### Frontend (UI & MVVM Layer)
+- This handles user interaction
+- .NET MAUI (XAML, ViewModels)
+### Baackend (Businedd Logic Layer)
+- Process requests, applies businedd logic, and interact with the data layer.
+- C# services and managers
+### Data Layer (SQLite)
+- Handles database operations, ensures data consistency
+
+
