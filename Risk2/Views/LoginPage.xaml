@@ -2,63 +2,68 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Risk2.Views.LoginPage">
 
-    <Grid RowDefinitions="0.25*,*,0.25*"
-          RowSpacing="0">
+    <ContentPage.Background>
+        <LinearGradientBrush EndPoint="0,1">
+            <GradientStop Color="Black"
+                          Offset="0.1"/>
+            <GradientStop Color="grey"
+                          Offset="1.0"/>
+        </LinearGradientBrush>
+    </ContentPage.Background>
 
-        <!--Logo Header-->
-        <Border Grid.Row="0"
-                Stroke="Transparent"
-                Margin="0"
-                Padding="0"
-                BackgroundColor="white">
+
+    <Grid HorizontalOptions="Center"
+          VerticalOptions="Center">
+
+        <VerticalStackLayout>
             <Image Grid.Row="0"
-                   Source="logo.png"
-                   VerticalOptions="End"/>
-        </Border>
+                   Source="risk2_logo.png"
+                   VerticalOptions="End"
+                   WidthRequest="100"
+                   HeightRequest="100"/>
 
-        <Border Grid.Row="1"
-                Stroke="Black"
-                Margin="10"
-                BackgroundColor="grey">
+            <Border Stroke="Transparent"
+                    StrokeShape="RoundRectangle 10,10,10,10"
+                    BackgroundColor="Transparent">
 
-            <Grid RowDefinitions="*,*,*"
-                  Padding="40"
-                  RowSpacing="20">
+                <VerticalStackLayout Padding="15">
 
-                <Border Style="{StaticResource AuthField}">
-                    <Entry Placeholder="Username"
-                           BackgroundColor="beige"/>
-                </Border>
-                <!-- <Border Grid.Row="0"
-                        Stroke="Black"
-                        StrokeShape="RoundRectangle 40,40,40,40">
-                    <Entry/>
-                </Border> -->
+                    <Border Style="{StaticResource AuthField}">
+                        <Entry Placeholder="Username"
+                               BackgroundColor="white"/>
+                    </Border>
 
-                <Border Grid.Row="1"
-                        Stroke="Black">
-                    <Entry/>
-                </Border>
+                    <Border Margin="0, 15, 0, 0"
+                            Style="{StaticResource AuthField}">
+                        <Entry Placeholder="Password"
+                               IsPassword="True"
+                               BackgroundColor="white"/>
+                    </Border>
 
-                <Border Grid.Row="2"
-                        Stroke="Black">
+                    <Button Grid.Column="0"
+                            Text="Login"
+                            Margin="0,15,0,0"
+                            MaximumWidthRequest="70"
+                            BackgroundColor="Black"
+                            HorizontalOptions="Start"/>
 
-                </Border>
+                    <BoxView Margin="0, 15, 0,0"
+                             Color="Black"
+                             WidthRequest="300"
+                             HeightRequest="1"/>
 
-            </Grid>
+                    <Label Margin="0, 15, 0,0"
+                           Text="sign up now"
+                           TextColor="white"
+                           FontSize="Small"
+                           HorizontalOptions="Center"/>
+
+                </VerticalStackLayout>
+
+            </Border>
 
 
-        </Border>
 
-        <Border Grid.Row="2"
-                Margin="0"
-                Padding="0">
-            <Label Text="Made by Swift"
-                   TextColor="Black"
-                   HorizontalTextAlignment="Center"
-                   Margin="20"/>
-        </Border>
+        </VerticalStackLayout>
     </Grid>
-
-
 </ContentPage>
