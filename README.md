@@ -12,7 +12,7 @@ This app uses a **3-Tier Architecture**
 ### Frontend (UI & MVVM Layer)
 - This handles user interaction
 - .NET MAUI (XAML, ViewModels)
-### Baackend (Businedd Logic Layer)
+### Backend (Businedd Logic Layer)
 - Process requests, applies businedd logic, and interact with the data layer.
 - C# services and managers
 ### Data Layer (SQLite)
