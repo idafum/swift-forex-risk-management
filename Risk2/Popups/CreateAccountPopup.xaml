@@ -1,0 +1,88 @@
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               xmlns:viewModels="clr-namespace:Risk2.ViewModels"
+               x:Class="Risk2.Popups.CreateAccountPopup"
+               x:DataType="viewModels:CreateAccountViewModel">
+
+
+    <ContentView HeightRequest="400"
+                 WidthRequest="300"
+                 BackgroundColor="White"
+                 Padding="20">
+
+        <Border Stroke="#485B4646">
+
+            <Grid RowDefinitions="*,4*,*"
+                  ColumnDefinitions="*,4*,*">
+
+                <Label Grid.Row="0"
+                       Grid.Column="1"
+                       Text="New Account"
+                       FontSize="Header"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"/>
+
+                <VerticalStackLayout Grid.Row="1"
+                                     Grid.Column="1"
+                                     Spacing="8">
+                    <VerticalStackLayout>
+                        <Label Text="Name"/>
+                        <Entry x:Name="AccountNameEntry"
+                               Placeholder="5-10 characters"
+                               Text="{Binding NewAccount.Name}"
+                               Keyboard="Text"/>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout>
+                        <Label Text="Balance"/>
+                        <Entry x:Name="AccountBalanceEntry"
+                               Placeholder="10000"
+                               Text="{Binding NewAccount.AccountSize}"
+                               Keyboard="Numeric"/>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout>
+                        <Label Text="Risk %"/>
+                        <Entry x:Name="RiskEntry"
+                               Placeholder="2"
+                               Text="{Binding NewAccount.Risk}"
+                               Keyboard="Numeric"/>
+                    </VerticalStackLayout>
+
+                </VerticalStackLayout>
+
+                <Grid Grid.Row="2"
+                      Grid.Column="1"
+                      ColumnDefinitions="*,*">
+
+
+                    <Button Grid.Column="0"
+                            HeightRequest="10"
+                            WidthRequest="20"
+                            Text="x"
+                            FontSize="Medium"
+                            BorderColor="Black"
+                            BorderWidth="1"
+                            TextColor="Red"
+                            BackgroundColor="white"
+                            Padding="0"
+                            Command="{Binding CancelCommand}"/>
+
+                    <Button Grid.Column="1"
+                            HeightRequest="10"
+                            WidthRequest="20"
+                            Text="√"
+                            FontSize="Medium"
+                            BorderColor="Black"
+                            BorderWidth="1"
+                            TextColor="Green"
+                            BackgroundColor="White"
+                            Command="{Binding DoneCommand}"/>
+                </Grid>
+            </Grid>
+        </Border>
+    </ContentView>
+
+</toolkit:Popup>

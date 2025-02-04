@@ -1,0 +1,98 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="Risk2.Views.AccountListPage"
+             Title="Accounts"
+             xmlns:model="clr-namespace:Risk2.Model"
+             xmlns:viewmodel="clr-namespace:Risk2.ViewModels"
+             x:DataType="viewmodel:AccountListViewModel">
+    <Grid RowDefinitions="2*, 0.5*">
+
+        <ListView x:Name="list"
+                  ItemsSource="{Binding AccountList}"
+                  HasUnevenRows="False"
+                  RowHeight="150"
+                  Grid.Row="0"
+                  VerticalScrollBarVisibility="Always"
+                  SelectionMode="None"
+                  Margin="10">
+
+            <ListView.ItemTemplate>
+
+                <DataTemplate x:DataType="model:Account">
+                    <ViewCell>
+                        <SwipeView>
+                            <SwipeView.LeftItems>
+                                <SwipeItems Mode="Reveal">
+                                    <SwipeItem
+                                        Text="Delete"
+                                        BackgroundColor="red"
+                                        Invoked="OnDeleteAccount"/>
+                                </SwipeItems>
+                            </SwipeView.LeftItems>
+
+                            <!-- <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem Text="New Trade"
+                                               BackgroundColor="Green"
+                                               Invoked="OnTradeSwipeItemInvoked"/>
+                                </SwipeItems>
+                            </SwipeView.RightItems> -->
+
+
+                            <Grid ColumnDefinitions="5*, 2*"
+                                  Margin="5">
+                                <Border Grid.Column="0"
+                                        Padding="5"
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center"
+                                        StrokeShape="RoundRectangle 10,10,10,10"
+                                        StrokeThickness="3"
+                                        Stroke="Black"
+                                        WidthRequest="250"
+                                        HeightRequest="100">
+
+                                    <Grid RowDefinitions="*, *"
+                                          ColumnDefinitions="*, *">
+
+                                        <Label Grid.Row="0"
+                                               Grid.Column="0"
+                                               Text="{Binding Name}"
+                                               VerticalOptions="Center"/>
+
+                                        <Label Grid.Row="1"
+                                               Grid.Column="0"
+                                               Text="{Binding AccountSize, StringFormat='{0:C}'}"
+                                               VerticalOptions="Center"/>
+
+                                        <Label Grid.Row="1"
+                                               Grid.Column="1"
+                                               Text="{Binding Risk, StringFormat='{0:P}'}"
+                                               HorizontalOptions="End"
+                                               VerticalOptions="Center"/>
+                                    </Grid>
+                                </Border>
+
+                                <Button Grid.Column="1"
+                                        Text="Edit"
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center"/>
+                            </Grid>
+
+                        </SwipeView>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
+
+        <Button Margin="10"
+                Text="+"
+                Grid.Row="1"
+                HorizontalOptions="End"
+                VerticalOptions="Center"
+                Command="{Binding CreateAccountCommand}"/>
+
+    </Grid>
+</ContentPage>
