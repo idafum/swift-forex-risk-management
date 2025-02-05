@@ -25,7 +25,9 @@
                 <Setter Property="WidthRequest"
                         Value="300"/>
                 <Setter Property="StrokeShape"
-                                Value="RoundRectangle 10,10,10,10"/>
+                        Value="RoundRectangle 10,10,10,10"/>
+                <Setter Property="BackgroundColor"
+                                Value="White"/>
         </Style>
         <Style TargetType="ActivityIndicator">
                 <Setter Property="Color"

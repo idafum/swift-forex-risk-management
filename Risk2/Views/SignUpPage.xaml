@@ -1,6 +1,6 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Risk2.Views.LoginPage">
+             x:Class="Risk2.Views.SignUpPage">
 
     <ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0"
@@ -32,8 +32,17 @@
                 <VerticalStackLayout Padding="15">
 
                     <Border Style="{StaticResource AuthField}">
-                        <Entry Placeholder="Username"
-                               BackgroundColor="white"/>
+                        <Entry Placeholder="firstname"/>
+                    </Border>
+
+                    <Border Style="{StaticResource AuthField}"
+                            Margin="0, 15, 0, 0">
+                        <Entry Placeholder="lastname"/>
+                    </Border>
+
+                    <Border Style="{StaticResource AuthField}"
+                            Margin="0, 15, 0, 0">
+                        <Entry Placeholder="Username"/>
                     </Border>
 
                     <Border Margin="0, 15, 0, 0"
@@ -44,7 +53,7 @@
                     </Border>
 
                     <Button Grid.Column="0"
-                            Text="Login"
+                            Text="Sign Up"
                             Margin="0,15,0,0"
                             MaximumWidthRequest="70"
                             BackgroundColor="Black"
@@ -54,20 +63,6 @@
                              Color="Black"
                              WidthRequest="300"
                              HeightRequest="1"/>
-
-                    <Label
-                        Margin="0, 15, 0,0"
-                        Text="sign up now"
-                        TextColor="white"
-                        FontSize="Small"
-                        HorizontalOptions="Center">
-
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnTapGestureRecognizerTapped"
-                                                  NumberOfTapsRequired="1"/>
-                        </Label.GestureRecognizers>
-                    </Label>
-
                 </VerticalStackLayout>
 
             </Border>
@@ -76,4 +71,5 @@
 
         </VerticalStackLayout>
     </Grid>
+
 </ContentPage>
