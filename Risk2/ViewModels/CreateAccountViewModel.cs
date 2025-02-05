@@ -29,7 +29,7 @@ public partial class CreateAccountViewModel : ObservableObject
     private void Done()
     {
         //validate
-        popupService.ClosePopup(newAccount);
+        popupService.ClosePopup(NewAccount);
     }
 
     /// <summary>
