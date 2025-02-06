@@ -8,6 +8,12 @@ namespace Risk2.ViewModels;
 public partial class LoginViewModel : ObservableObject
 {
 
+    [ObservableProperty]
+    string? userName = null;
+
+    [ObservableProperty]
+    string? password = null;
+
     // TODO: Bind Login Data and handle login request
     public LoginViewModel()
     {

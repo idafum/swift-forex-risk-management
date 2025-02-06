@@ -1,3 +1,6 @@
+/*
+    The User Repository uses the DB connetction string to manipulate the User Table
+*/
 using SQLite;
 using Risk2.Data.Models;
 using System.Threading.Tasks;

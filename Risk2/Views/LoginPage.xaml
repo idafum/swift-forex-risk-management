@@ -33,14 +33,16 @@
 
                     <Border Style="{StaticResource AuthField}">
                         <Entry Placeholder="Username"
-                               BackgroundColor="white"/>
+                               BackgroundColor="white"
+                               Text="{Binding Username}"/>
                     </Border>
 
                     <Border Margin="0, 15, 0, 0"
                             Style="{StaticResource AuthField}">
                         <Entry Placeholder="Password"
                                IsPassword="True"
-                               BackgroundColor="white"/>
+                               BackgroundColor="white"
+                               Text="{Binding Password}"/>
                     </Border>
 
                     <Button Grid.Column="0"
