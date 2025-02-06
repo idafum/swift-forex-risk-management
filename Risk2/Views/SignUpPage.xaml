@@ -55,9 +55,10 @@
                     <Button Grid.Column="0"
                             Text="Sign Up"
                             Margin="0,15,0,0"
-                            MaximumWidthRequest="70"
+                            MaximumWidthRequest="100"
                             BackgroundColor="Black"
-                            HorizontalOptions="Start"/>
+                            HorizontalOptions="Start"
+                            Clicked="OnSignUpClicked"/>
 
                     <BoxView Margin="0, 15, 0,0"
                              Color="Black"

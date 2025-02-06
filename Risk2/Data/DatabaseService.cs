@@ -1,3 +1,6 @@
+/*
+    DatabaseService is used to Initialize the Database tables
+*/
 using SQLite;
 using Risk2.Data.Models;
 using System;
@@ -8,12 +11,15 @@ namespace Risk2.Data
     public class DatabaseService
     {
         private readonly SQLiteAsyncConnection _db;
-
-        public DatabaseService(SQLiteAsyncConnection connection)
+        public DatabaseService(SQLiteAsyncConnection connection) //DI
         {
             _db = connection;
         }
 
+        /// <summary>
+        /// Async initialization
+        /// </summary>
+        /// <returns></returns>
         public async Task InitializeAsync()
         {
             await _db.CreateTableAsync<User>();
