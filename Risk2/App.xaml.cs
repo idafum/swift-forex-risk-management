@@ -9,7 +9,7 @@ public partial class App : Application
 	public App(DatabaseService databaseService)
 	{
 		InitializeComponent();
-		Task.Run(async () => await databaseService.InitializeAsync()).Wait();
+		Task.Run(async () => await databaseService.InitializeAsync()).Wait(); //Initialize Database
 	}
 
 	protected override Window CreateWindow(IActivationState? activationState)

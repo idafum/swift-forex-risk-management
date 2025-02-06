@@ -11,15 +11,15 @@ public partial class LoginPage : ContentPage
         BindingContext = new LoginViewModel();
     }
 
+    /// <summary>
+    /// This event is invoked when the 'sign up now' label is clicked
+    /// 
+    /// The current window is replaced with the Sign Up Page
+    /// </summary>
+    /// <param name="sender"> Label control </param>
+    /// <param name="args"></param>
     void OnTapGestureRecognizerTapped(object sender, TappedEventArgs args)
     {
-        //Change text color
-        Label? label = sender as Label;
-
-        if (label != null)
-            label.TextColor = Colors.Blue;
-
-
         if (Application.Current?.Windows.Count > 0)
         {
             Application.Current.Windows[0].Page = new SignUpPage();
