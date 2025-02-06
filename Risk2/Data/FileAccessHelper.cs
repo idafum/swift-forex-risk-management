@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace Risk2.Data;
 
 public class FileAccessHelper
@@ -7,7 +9,9 @@ public class FileAccessHelper
     //
     public static string GetLocalFilePath(string filename)
     {
+        string dbPath = System.IO.Path.Combine(FileSystem.AppDataDirectory, filename);
+        Debug.WriteLine($"[SQLite] Database Path: {dbPath}");
 
-        return System.IO.Path.Combine(FileSystem.AppDataDirectory, filename);
+        return dbPath;
     }
 }

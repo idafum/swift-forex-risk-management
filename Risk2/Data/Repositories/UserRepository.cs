@@ -1,43 +1,37 @@
 using SQLite;
 using Risk2.Data.Models;
+using System.Threading.Tasks;
+using SQLitePCL;
+using CoreImage;
+using System.Data.Common;
 
 namespace Risk2.Data.Repositories;
 
-public class UserRepository(string dbPath)
+public class UserRepository
 {
-    string _dbPath = dbPath;
-
     public string StatusMessage { get; set; } = "";
-    //Private SQLiteConnection field
-    private SQLiteConnection? conn;
+    private readonly SQLiteAsyncConnection? _conn;
 
-    private void Init()
+    public UserRepository(SQLiteAsyncConnection conn) //Injected using DI
     {
-        //Initialization code for the SQLite DB only runs once
-        if (conn != null)
-            return;
-
-        conn = new SQLiteConnection(_dbPath);
-        conn.CreateTable<User>();
+        _conn = conn;
     }
 
     /// <summary>
     /// Add a new user to the Database
     /// </summary>
     /// <param name="user"></param>
-    public void AddNewUser(User user)
+    public async Task AddNewUser(User user)
     {
         int result = 0;
         try
         {
-            Init(); //Ensure the db is initialized;
-
             //MVP: Only Username is validated
             if (string.IsNullOrEmpty(user.Username))
                 throw new Exception("Valid name required");
 
-            if (conn != null)
-                result = conn.Insert(user);
+            if (_conn != null)
+                result = await _conn.InsertAsync(user);
 
             StatusMessage = $"{result} record(s) added (Username: {user.Username})";
         }
