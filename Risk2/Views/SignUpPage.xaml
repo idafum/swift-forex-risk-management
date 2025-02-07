@@ -1,6 +1,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Risk2.Views.SignUpPage">
+             x:Class="Risk2.Views.SignUpPage"
+             xmlns:viewmodel="clr-namespace:Risk2.ViewModels"
+             x:DataType="viewmodel:SignUpViewModel">
 
     <ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0"
@@ -32,24 +34,28 @@
                 <VerticalStackLayout Padding="15">
 
                     <Border Style="{StaticResource AuthField}">
-                        <Entry Placeholder="firstname"/>
+                        <Entry Placeholder="firstname"
+                               Text="{Binding Firstname}"/>
                     </Border>
 
                     <Border Style="{StaticResource AuthField}"
                             Margin="0, 15, 0, 0">
-                        <Entry Placeholder="lastname"/>
+                        <Entry Placeholder="lastname"
+                               Text="{Binding Lastname}"/>
                     </Border>
 
                     <Border Style="{StaticResource AuthField}"
                             Margin="0, 15, 0, 0">
-                        <Entry Placeholder="Username"/>
+                        <Entry Placeholder="Username"
+                               Text="{Binding Username}"/>
                     </Border>
 
                     <Border Margin="0, 15, 0, 0"
                             Style="{StaticResource AuthField}">
                         <Entry Placeholder="Password"
                                IsPassword="True"
-                               BackgroundColor="white"/>
+                               BackgroundColor="white"
+                               Text="{Binding Password}"/>
                     </Border>
 
                     <Button Grid.Column="0"

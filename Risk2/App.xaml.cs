@@ -15,11 +15,8 @@ public partial class App : Application
 		Task.Run(async () => await databaseService.InitializeAsync()).Wait(); //Initialize Database
 	}
 
-
 	protected override Window CreateWindow(IActivationState? activationState)
 	{
-		var loginViewModel = _services.GetRequiredService<LoginViewModel>();
-
-		return new Window(new LoginPage(loginViewModel)); //Starts at login page
+		return new Window(new LoginPage(_services)); //Starts at login page
 	}
 }

@@ -13,23 +13,29 @@ namespace Risk2.ViewModels;
 public partial class LoginViewModel : ObservableObject
 {
 
-    private readonly AuthManager authManager;
-    private readonly UserRepository _userRepo;
+    private readonly AuthManager _authManager;
+
     [ObservableProperty]
     string? username;
 
     [ObservableProperty]
     string? password;
 
+    /// <summary>
+    /// The methos is called from the OnLogicCliked event.
+    /// It sends reqeust and parameters to the Backend
+    /// </summary>
+    /// <returns></returns>
     public async Task OnLogin()
     {
         //Contacts the Auth Manager in the backend
         if (!string.IsNullOrWhiteSpace(Username) && !string.IsNullOrWhiteSpace(Password))
         {
             //Send request to the auth manager.
-            User? user = await authManager.HandleLoginRequest(Username, Password);
+            User? user = await _authManager.HandleLoginRequest(Username, Password);
             if (user != null)
             {
+                //TODO..
                 //Navigate to the User account page.
             }
             else
@@ -37,7 +43,6 @@ public partial class LoginViewModel : ObservableObject
                 var toast = Toast.Make("User does not exist", ToastDuration.Short, 14);
                 await toast.Show();
             }
-
         }
         else
         {
@@ -51,11 +56,9 @@ public partial class LoginViewModel : ObservableObject
 
     }
 
-    // TODO: Bind Login Data and handle login request
-    public LoginViewModel(UserRepository userRepo)
+    public LoginViewModel(AuthManager authManager) //Injected through DI
     {
-        _userRepo = userRepo;
-        authManager = new(_userRepo); //Initialize the Auth manager;
+        _authManager = authManager;
     }
 
 }
