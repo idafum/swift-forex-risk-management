@@ -8,6 +8,7 @@ using SQLitePCL;
 using CoreImage;
 using System.Data.Common;
 using System.Diagnostics;
+using AuthenticationServices;
 
 namespace Risk2.Data.Repositories;
 
@@ -68,6 +69,44 @@ public class UserRepository
         {
             Debug.WriteLine($"[SQLite] Error Getting User By Credentials: {ex.Message}");
             return null;
+        }
+    }
+
+    public async Task<bool> SignUpUserAsync(string firstname, string lastname, string username, string password)
+    {
+        try
+        {
+            if (_conn != null)
+            {
+                //Check if username exists
+                var existingUser = await _conn.Table<User>().Where(u => u.Username == username).FirstOrDefaultAsync();
+
+                if (existingUser != null)
+                {
+                    Debug.WriteLine("[SQLite] Username already taken");
+                    return false;
+                }
+
+                var newUser = new User
+                {
+                    FirstName = firstname,
+                    LastName = lastname,
+                    Username = username,
+                    Password = password
+                };
+
+                //Insert new user to database
+                int result = await _conn.InsertAsync(newUser);
+
+                return result > 0;
+            }
+            else
+                return false;
+
+        }
+        catch (Exception ex)
+        {
+            return false;
         }
     }
 

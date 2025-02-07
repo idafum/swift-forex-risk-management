@@ -1,36 +1,32 @@
+
 using Risk2.ViewModels;
 
 namespace Risk2.Views;
 
 public partial class SignUpPage : ContentPage
 {
-    private readonly LoginViewModel _loginViewModel;
-    public SignUpPage(LoginViewModel loginViewModel) //DI
+    private readonly SignUpViewModel? _signUpViewModel;
+    private readonly IServiceProvider _service;
+    public SignUpPage(IServiceProvider serviceProvider) //DI
     {
         InitializeComponent();
-        _loginViewModel = loginViewModel;
+        _service = serviceProvider;
 
-        BindingContext = new SignUpViewModel(); //Set the Binding Context
-
+        //Explicit Dependency resolution
+        _signUpViewModel = _service.GetService<SignUpViewModel>();
+        BindingContext = _signUpViewModel; //Set the Binding Context
     }
 
     /// <summary>
-    /// This method is invoked when the 'Sign Up' Button is clicked
+    /// Event Handler
+    /// Fires with the SignUp button is clicked
     /// 
-    /// Its sends creat account request to the backend.
-    /// If successfull, navigate back to the login screen
-    /// else 'username' already exists'
+    /// It calls the OnSignUpInvoked in the view model
     /// </summary>
     /// <param name="sender">Button control</param>
     /// <param name="eventArgs"></param>
-    private void OnSignUpClicked(object sender, EventArgs eventArgs)
+    private async void OnSignUpClicked(object sender, EventArgs eventArgs)
     {
-
-        //TODO..
-        //MVP: Navigate back to the login 
-        if (Application.Current?.Windows.Count > 0)
-        {
-            Application.Current.Windows[0].Page = new LoginPage(_loginViewModel); //DI used here.
-        }
+        await _signUpViewModel.OnSignUpInvoked();
     }
 }

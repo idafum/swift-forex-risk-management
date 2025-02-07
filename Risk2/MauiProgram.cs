@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
+using Risk2.Backend;
 using Risk2.Data;
 using Risk2.Data.Models;
 using Risk2.Data.Repositories;
@@ -31,7 +32,10 @@ public static class MauiProgram
 		builder.Services.AddSingleton(connection);
 		builder.Services.AddSingleton<UserRepository>();
 		builder.Services.AddSingleton<DatabaseService>();
-		builder.Services.AddTransient<LoginViewModel>(); //Now instance created when needed
+		builder.Services.AddTransient<SignUpViewModel>();
+		builder.Services.AddTransient<LoginViewModel>(); //New instance created when needed
+
+		builder.Services.AddSingleton<AuthManager>();
 
 		builder.Services.AddSingleton<AccountListPage>();
 		builder.Services.AddSingleton<AccountListViewModel>();

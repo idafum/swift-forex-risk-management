@@ -1,17 +1,20 @@
-using System.Threading.Tasks;
-using System.Xml.Serialization;
 using Risk2.ViewModels;
 
 namespace Risk2.Views;
 
 public partial class LoginPage : ContentPage
 {
-    private readonly LoginViewModel _vm;
-    public LoginPage(LoginViewModel vm) //Inject LoginViewModel
+    private readonly LoginViewModel? _loginViewModel;
+    private readonly IServiceProvider _service;
+
+    public LoginPage(IServiceProvider serviceProvider)
     {
         InitializeComponent();
-        _vm = vm;
-        BindingContext = _vm; //Set the binding context
+        _service = serviceProvider;
+
+        //Explicit Dependency Resolution
+        _loginViewModel = _service.GetService<LoginViewModel>();
+        BindingContext = _loginViewModel; //Set the binding context
     }
 
     /// <summary>
@@ -25,18 +28,21 @@ public partial class LoginPage : ContentPage
     {
         if (Application.Current?.Windows.Count > 0)
         {
-            Application.Current.Windows[0].Page = new SignUpPage(_vm); //DI used here
+            Application.Current.Windows[0].Page = new SignUpPage(_service);
         }
     }
 
     /// <summary>
-    /// Evenh Handler
+    /// Event Handler
     /// Invoked when the Login button is clicked
+    /// 
+    /// It calls the OnLogin in the view model
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="args"></param>
     private async void OnLoginClicked(object sender, EventArgs args)
     {
-        await _vm.OnLogin();
+
+        await _loginViewModel.OnLogin();
     }
 }

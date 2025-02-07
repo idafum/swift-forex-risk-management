@@ -1,10 +1,21 @@
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Risk2.Backend;
+using Risk2.Data.Repositories;
+using Risk2.Views;
 
 namespace Risk2.ViewModels;
 
 public partial class SignUpViewModel : ObservableObject
 {
+
+    private readonly AuthManager _authManager;
+
+    private IServiceProvider _service;
+
     [ObservableProperty]
     string? firstname;
     [ObservableProperty]
@@ -14,8 +25,47 @@ public partial class SignUpViewModel : ObservableObject
     [ObservableProperty]
     string? password;
 
-    public SignUpViewModel()
+    public SignUpViewModel(AuthManager authManager, IServiceProvider serviceProvider) // DI
     {
-        Firstname = "Somto";
+        _authManager = authManager;
+        _service = serviceProvider;
+    }
+
+    /// <summary>
+    /// This method is called from the OnSigUpClicked event.
+    ///
+    /// It sends request and parameters to the backend
+    /// </summary>
+    /// <returns></returns>
+    public async Task OnSignUpInvoked()
+    {
+        if (!string.IsNullOrWhiteSpace(Firstname) && !string.IsNullOrWhiteSpace(Lastname) &&
+            !string.IsNullOrWhiteSpace(Username) && !string.IsNullOrWhiteSpace(Password))
+        {
+            //Send sign up request to Auth Manager
+            bool response = await _authManager.HandleSignUpRequest(Firstname, Lastname, Username, Password);
+
+            if (response == true)
+            {
+                var toast = Toast.Make("User Created Successfully", ToastDuration.Short, 14);
+                await toast.Show();
+
+                //Navigate back to the login page
+                if (Application.Current?.Windows.Count > 0)
+                {
+                    Application.Current.Windows[0].Page = new LoginPage(_service);
+                }
+            }
+            else
+            {
+                var toast = Toast.Make("Error Signing up, try again!", ToastDuration.Short, 14);
+                await toast.Show();
+            }
+        }
+        else
+        {
+            var toast = Toast.Make("Fill out form", ToastDuration.Short, 14);
+            await toast.Show();
+        }
     }
 }
