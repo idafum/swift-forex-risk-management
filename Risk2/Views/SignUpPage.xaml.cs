@@ -10,6 +10,8 @@ public partial class SignUpPage : ContentPage
         InitializeComponent();
         _loginViewModel = loginViewModel;
 
+        BindingContext = new SignUpViewModel(); //Set the Binding Context
+
     }
 
     /// <summary>
@@ -31,5 +33,4 @@ public partial class SignUpPage : ContentPage
             Application.Current.Windows[0].Page = new LoginPage(_loginViewModel); //DI used here.
         }
     }
-
 }
