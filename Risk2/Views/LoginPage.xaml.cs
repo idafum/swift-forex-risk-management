@@ -7,7 +7,7 @@ namespace Risk2.Views;
 public partial class LoginPage : ContentPage
 {
     private readonly LoginViewModel _vm;
-    public LoginPage(LoginViewModel vm)
+    public LoginPage(LoginViewModel vm) //Inject LoginViewModel
     {
         InitializeComponent();
         _vm = vm;
@@ -25,7 +25,7 @@ public partial class LoginPage : ContentPage
     {
         if (Application.Current?.Windows.Count > 0)
         {
-            Application.Current.Windows[0].Page = new SignUpPage(_vm);
+            Application.Current.Windows[0].Page = new SignUpPage(_vm); //DI used here
         }
     }
 
