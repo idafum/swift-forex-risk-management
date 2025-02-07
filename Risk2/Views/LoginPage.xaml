@@ -1,7 +1,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Risk2.Views.LoginPage">
-
+             x:Class="Risk2.Views.LoginPage"
+             xmlns:viewmodel="clr-namespace:Risk2.ViewModels"
+             x:DataType="viewmodel:LoginViewModel">
     <ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0"
                              EndPoint="0,1">
@@ -34,7 +35,7 @@
                     <Border Style="{StaticResource AuthField}">
                         <Entry Placeholder="Username"
                                BackgroundColor="white"
-                               Text="{Binding Username}"/>
+                               Text="{Binding Username,Mode=OneWayToSource}"/>
                     </Border>
 
                     <Border Margin="0, 15, 0, 0"
@@ -42,15 +43,17 @@
                         <Entry Placeholder="Password"
                                IsPassword="True"
                                BackgroundColor="white"
-                               Text="{Binding Password}"/>
+                               Text="{Binding Password,Mode=OneWayToSource}"/>
                     </Border>
 
-                    <Button Grid.Column="0"
-                            Text="Login"
-                            Margin="0,15,0,0"
-                            MaximumWidthRequest="70"
-                            BackgroundColor="Black"
-                            HorizontalOptions="Start"/>
+                    <Button
+                        Grid.Column="0"
+                        Text="Login"
+                        Margin="0,15,0,0"
+                        MaximumWidthRequest="70"
+                        BackgroundColor="Black"
+                        HorizontalOptions="Start"
+                        Clicked="OnLoginClicked"/>
 
                     <BoxView Margin="0, 15, 0,0"
                              Color="Black"

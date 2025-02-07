@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using SQLitePCL;
 using CoreImage;
 using System.Data.Common;
+using System.Diagnostics;
 
 namespace Risk2.Data.Repositories;
 
@@ -41,6 +42,32 @@ public class UserRepository
         catch (Exception ex)
         {
             StatusMessage = $"Failed to add {user.Username}. Error: {ex.Message}";
+        }
+    }
+
+    /// <summary>
+    /// This method query the database to find and return a User 
+    /// with the Username and Password
+    /// </summary>
+    /// <param name="username">Username</param>
+    /// <param name="password">Password</param>
+    /// <returns>The User if User exixts or Null</returns>
+    public async Task<User?> GetUserByCredentialsAsync(string username, string password)
+    {
+        try
+        {
+            if (_conn != null)
+            {
+                return await _conn.Table<User>()
+                                .Where(u => u.Username == username && u.Password == password)
+                                .FirstOrDefaultAsync();
+            }
+            return null; //if connection is not valid
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"[SQLite] Error Getting User By Credentials: {ex.Message}");
+            return null;
         }
     }
 

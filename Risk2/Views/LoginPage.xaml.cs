@@ -1,14 +1,17 @@
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 using Risk2.ViewModels;
 
 namespace Risk2.Views;
 
 public partial class LoginPage : ContentPage
 {
-    public LoginPage()
+    private readonly LoginViewModel _vm;
+    public LoginPage(LoginViewModel vm)
     {
         InitializeComponent();
-        BindingContext = new LoginViewModel(); //Set the binding context
+        _vm = vm;
+        BindingContext = _vm; //Set the binding context
     }
 
     /// <summary>
@@ -18,11 +21,22 @@ public partial class LoginPage : ContentPage
     /// </summary>
     /// <param name="sender"> Label control </param>
     /// <param name="args"></param>
-    void OnTapGestureRecognizerTapped(object sender, TappedEventArgs args)
+    private void OnTapGestureRecognizerTapped(object sender, TappedEventArgs args)
     {
         if (Application.Current?.Windows.Count > 0)
         {
-            Application.Current.Windows[0].Page = new SignUpPage();
+            Application.Current.Windows[0].Page = new SignUpPage(_vm);
         }
+    }
+
+    /// <summary>
+    /// Evenh Handler
+    /// Invoked when the Login button is clicked
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="args"></param>
+    private async void OnLoginClicked(object sender, EventArgs args)
+    {
+        await _vm.OnLogin();
     }
 }
