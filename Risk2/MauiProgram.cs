@@ -31,6 +31,7 @@ public static class MauiProgram
 		builder.Services.AddSingleton(connection);
 		builder.Services.AddSingleton<UserRepository>();
 		builder.Services.AddSingleton<DatabaseService>();
+		builder.Services.AddTransient<LoginViewModel>(); //Now instance created when needed
 
 		builder.Services.AddSingleton<AccountListPage>();
 		builder.Services.AddSingleton<AccountListViewModel>();

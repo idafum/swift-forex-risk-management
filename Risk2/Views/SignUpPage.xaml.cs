@@ -1,10 +1,14 @@
+using Risk2.ViewModels;
+
 namespace Risk2.Views;
 
 public partial class SignUpPage : ContentPage
 {
-    public SignUpPage()
+    private readonly LoginViewModel _loginViewModel;
+    public SignUpPage(LoginViewModel loginViewModel) //DI
     {
         InitializeComponent();
+        _loginViewModel = loginViewModel;
 
     }
 
@@ -24,7 +28,7 @@ public partial class SignUpPage : ContentPage
         //MVP: Navigate back to the login 
         if (Application.Current?.Windows.Count > 0)
         {
-            Application.Current.Windows[0].Page = new LoginPage();
+            Application.Current.Windows[0].Page = new LoginPage(_loginViewModel); //DI used here.
         }
     }
 
