@@ -30,8 +30,11 @@ public static class MauiProgram
 		var connection = new SQLiteAsyncConnection(dbPath, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create | SQLiteOpenFlags.FullMutex);
 
 		builder.Services.AddSingleton(connection);
-		builder.Services.AddSingleton<UserRepository>();
 		builder.Services.AddSingleton<DatabaseService>();
+
+
+		builder.Services.AddSingleton<UserRepository>();
+
 		builder.Services.AddTransient<SignUpViewModel>();
 		builder.Services.AddTransient<LoginViewModel>(); //New instance created when needed
 

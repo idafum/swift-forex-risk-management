@@ -13,8 +13,7 @@ public partial class SignUpViewModel : ObservableObject
 {
 
     private readonly AuthManager _authManager;
-
-    private IServiceProvider _service;
+    private readonly LoginViewModel _loginViewModel;
 
     [ObservableProperty]
     string? firstname;
@@ -25,10 +24,10 @@ public partial class SignUpViewModel : ObservableObject
     [ObservableProperty]
     string? password;
 
-    public SignUpViewModel(AuthManager authManager, IServiceProvider serviceProvider) // DI
+    public SignUpViewModel(AuthManager authManager, LoginViewModel loginViewModel) // DI
     {
         _authManager = authManager;
-        _service = serviceProvider;
+        _loginViewModel = loginViewModel;
     }
 
     /// <summary>
@@ -53,7 +52,7 @@ public partial class SignUpViewModel : ObservableObject
                 //Navigate back to the login page
                 if (Application.Current?.Windows.Count > 0)
                 {
-                    Application.Current.Windows[0].Page = new LoginPage(_service);
+                    Application.Current.Windows[0].Page = new LoginPage(_loginViewModel, this);
                 }
             }
             else

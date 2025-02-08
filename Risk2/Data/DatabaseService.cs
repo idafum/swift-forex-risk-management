@@ -1,10 +1,11 @@
 /*
-    DatabaseService is used to Initialize the Database tables
+    DatabaseService uses the SQLiteAsyncConnection to initialize tables.
 */
 using SQLite;
 using Risk2.Data.Models;
 using System;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace Risk2.Data
 {
@@ -17,12 +18,24 @@ namespace Risk2.Data
         }
 
         /// <summary>
-        /// Async initialization
+        /// Initialize the database with error handling
         /// </summary>
         /// <returns></returns>
-        public async Task InitializeAsync()
+        public async Task<bool> InitAsync()
         {
-            await _db.CreateTableAsync<User>();
+            try
+            {
+                Debug.WriteLine("[Database] Initialiing database...");
+                await _db.CreateTableAsync<User>();
+
+                Debug.WriteLine("[Database] Initialization successful");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[Database Error] Failed to initialize: {ex.Message}");
+                return false;
+            }
 
         }
     }

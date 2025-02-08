@@ -9,9 +9,24 @@ public class FileAccessHelper
     //
     public static string GetLocalFilePath(string filename)
     {
-        string dbPath = System.IO.Path.Combine(FileSystem.AppDataDirectory, filename);
-        Debug.WriteLine($"[SQLite] Database Path: {dbPath}");
+#if DEBUG
+        //Store database in a folder on Desktop when debugging
+        string debugFolder = "/Users/somto/Desktop/Risk2.DB";
 
+        // Ensure the folder exists
+        if (!Directory.Exists(debugFolder))
+        {
+            Directory.CreateDirectory(debugFolder);
+        }
+
+        string dbPath = Path.Combine(debugFolder, filename);
+#else
+
+        //Defult location for production (App Sandbox)
+        string dbPath = System.IO.Path.Combine(FileSystem.AppDataDirectory, filename);
+#endif
+
+        Debug.WriteLine($"[SQLite] Database Path: {dbPath}");
         return dbPath;
     }
 }
