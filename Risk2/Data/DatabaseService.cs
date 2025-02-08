@@ -1,5 +1,5 @@
 /*
-    DatabaseService is used to Initialize the Database tables
+    DatabaseService uses the SQLiteAsyncConnection to initialize tables.
 */
 using SQLite;
 using Risk2.Data.Models;

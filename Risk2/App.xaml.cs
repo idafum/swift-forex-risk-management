@@ -8,11 +8,21 @@ namespace Risk2;
 public partial class App : Application
 {
 	private readonly IServiceProvider _services;
-	public App(DatabaseService databaseService, IServiceProvider services)
+	public App(IServiceProvider services)
 	{
 		InitializeComponent();
 		_services = services;
-		Task.Run(async () => await databaseService.InitializeAsync()).Wait(); //Initialize Database
+		DatabaseService? databaseService = _services.GetService<DatabaseService>();
+
+		if (databaseService == null)
+		{
+			//TODO
+			//Display Error and End app.
+		}
+		else
+		{
+			databaseService.InitializeAsync().Wait(); //Call the Init database methods
+		}
 	}
 
 	protected override Window CreateWindow(IActivationState? activationState)
