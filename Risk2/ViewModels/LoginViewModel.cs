@@ -35,8 +35,17 @@ public partial class LoginViewModel : ObservableObject
             User? user = await _authManager.HandleLoginRequest(Username, Password);
             if (user != null)
             {
-                //TODO..
-                //Navigate to the User account page.
+                if (Application.Current != null)
+                {
+                    //Single window application.
+                    Application.Current.Windows[0].Page = new AppShell();
+                }
+                else
+                {
+                    //Display Error Page.
+                    //TODO...
+                }
+
             }
             else
             {

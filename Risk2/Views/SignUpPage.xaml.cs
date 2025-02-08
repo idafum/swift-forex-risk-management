@@ -25,6 +25,6 @@ public partial class SignUpPage : ContentPage
     /// <param name="eventArgs"></param>
     private async void OnSignUpClicked(object sender, EventArgs eventArgs)
     {
-        await _signUpViewModel.OnSignUpInvoked();
+        await _signUpViewModel.OnSignUpInvoked(Navigation);
     }
 }

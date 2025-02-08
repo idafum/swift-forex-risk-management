@@ -23,12 +23,9 @@ public partial class LoginPage : ContentPage
     /// </summary>
     /// <param name="sender"> Label control </param>
     /// <param name="args"></param>
-    private void OnTapGestureRecognizerTapped(object sender, TappedEventArgs args)
+    private async void OnTapGestureRecognizerTapped(object sender, TappedEventArgs args)
     {
-        if (Application.Current?.Windows.Count > 0)
-        {
-            Application.Current.Windows[0].Page = new SignUpPage(_signUpViewModel);
-        }
+        await Navigation.PushAsync(new SignUpPage(_signUpViewModel));
     }
 
     /// <summary>
@@ -42,6 +39,7 @@ public partial class LoginPage : ContentPage
     private async void OnLoginClicked(object sender, EventArgs args)
     {
 
+        //Perform view model logic. 
         await _loginViewModel.OnLogin();
     }
 }
