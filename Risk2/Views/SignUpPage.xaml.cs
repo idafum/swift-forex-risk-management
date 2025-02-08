@@ -5,15 +5,13 @@ namespace Risk2.Views;
 
 public partial class SignUpPage : ContentPage
 {
-    private readonly SignUpViewModel? _signUpViewModel;
-    private readonly IServiceProvider _service;
-    public SignUpPage(IServiceProvider serviceProvider) //DI
+    private readonly SignUpViewModel _signUpViewModel;
+    public SignUpPage(SignUpViewModel signUpViewModel) //DI
     {
         InitializeComponent();
-        _service = serviceProvider;
 
-        //Explicit Dependency resolution
-        _signUpViewModel = _service.GetService<SignUpViewModel>();
+        _signUpViewModel = signUpViewModel;
+
         BindingContext = _signUpViewModel; //Set the Binding Context
     }
 

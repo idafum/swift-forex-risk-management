@@ -31,6 +31,8 @@ public static class MauiProgram
 
 		builder.Services.AddSingleton(connection);
 		builder.Services.AddSingleton<DatabaseService>();
+
+
 		builder.Services.AddSingleton<UserRepository>();
 
 		builder.Services.AddTransient<SignUpViewModel>();

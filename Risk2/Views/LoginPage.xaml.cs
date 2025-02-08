@@ -4,16 +4,15 @@ namespace Risk2.Views;
 
 public partial class LoginPage : ContentPage
 {
-    private readonly LoginViewModel? _loginViewModel;
-    private readonly IServiceProvider _service;
-
-    public LoginPage(IServiceProvider serviceProvider)
+    private readonly LoginViewModel _loginViewModel;
+    private readonly SignUpViewModel _signUpViewModel;
+    public LoginPage(LoginViewModel loginViewModel, SignUpViewModel signUpViewModel) //Resolved DI
     {
         InitializeComponent();
-        _service = serviceProvider;
 
-        //Explicit Dependency Resolution
-        _loginViewModel = _service.GetService<LoginViewModel>();
+        _loginViewModel = loginViewModel;
+        _signUpViewModel = signUpViewModel;
+
         BindingContext = _loginViewModel; //Set the binding context
     }
 
@@ -28,7 +27,7 @@ public partial class LoginPage : ContentPage
     {
         if (Application.Current?.Windows.Count > 0)
         {
-            Application.Current.Windows[0].Page = new SignUpPage(_service);
+            Application.Current.Windows[0].Page = new SignUpPage(_signUpViewModel);
         }
     }
 
