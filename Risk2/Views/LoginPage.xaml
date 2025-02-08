@@ -2,7 +2,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Risk2.Views.LoginPage"
              xmlns:viewmodel="clr-namespace:Risk2.ViewModels"
-             x:DataType="viewmodel:LoginViewModel">
+             x:DataType="viewmodel:LoginViewModel"
+             NavigationPage.HasNavigationBar="false">
+
     <ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0"
                              EndPoint="0,1">

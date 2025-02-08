@@ -43,7 +43,7 @@ public partial class App : Application
 			LoginViewModel loginViewModel = _services.GetRequiredService<LoginViewModel>();
 			SignUpViewModel signUpViewModel = _services.GetRequiredService<SignUpViewModel>(); ;
 
-			return new Window(new LoginPage(loginViewModel, signUpViewModel)); //Starts at login page
+			return new Window(new NavigationPage(new LoginPage(loginViewModel, signUpViewModel))); //Starts at login page
 		}
 		catch (Exception ex)
 		{

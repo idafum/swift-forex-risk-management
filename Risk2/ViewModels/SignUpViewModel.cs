@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Microsoft.Maui.Controls;
 using Risk2.Backend;
 using Risk2.Data.Repositories;
 using Risk2.Views;
@@ -36,7 +37,7 @@ public partial class SignUpViewModel : ObservableObject
     /// It sends request and parameters to the backend
     /// </summary>
     /// <returns></returns>
-    public async Task OnSignUpInvoked()
+    public async Task OnSignUpInvoked(INavigation navigation)
     {
         if (!string.IsNullOrWhiteSpace(Firstname) && !string.IsNullOrWhiteSpace(Lastname) &&
             !string.IsNullOrWhiteSpace(Username) && !string.IsNullOrWhiteSpace(Password))
@@ -49,11 +50,8 @@ public partial class SignUpViewModel : ObservableObject
                 var toast = Toast.Make("User Created Successfully", ToastDuration.Short, 14);
                 await toast.Show();
 
-                //Navigate back to the login page
-                if (Application.Current?.Windows.Count > 0)
-                {
-                    Application.Current.Windows[0].Page = new LoginPage(_loginViewModel, this);
-                }
+                //Programmatically navigate back to the login page.
+                await navigation.PopAsync();
             }
             else
             {
