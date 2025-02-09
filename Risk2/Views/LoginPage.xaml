@@ -17,6 +17,13 @@
         </LinearGradientBrush>
     </ContentPage.Background>
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Thickness x:Key="VerticalItemSpacing">0,15,0,0</Thickness>
+            <Color x:Key="InputBoxColor">White</Color>
+            <Color x:Key="ButtonBgColor">Black</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <Grid HorizontalOptions="Center"
           VerticalOptions="Center">
@@ -33,37 +40,39 @@
                     BackgroundColor="Transparent">
 
                 <VerticalStackLayout Padding="15">
-
+                    <!--Username field -->
                     <Border Style="{StaticResource AuthField}">
                         <Entry Placeholder="Username"
-                               BackgroundColor="white"
+                               BackgroundColor="{StaticResource InputBoxColor}"
                                Text="{Binding Username,Mode=OneWayToSource}"/>
                     </Border>
 
-                    <Border Margin="0, 15, 0, 0"
+                    <!--Password Field -->
+                    <Border Margin="{StaticResource VerticalItemSpacing}"
                             Style="{StaticResource AuthField}">
                         <Entry Placeholder="Password"
                                IsPassword="True"
-                               BackgroundColor="white"
+                               BackgroundColor="{StaticResource InputBoxColor}"
                                Text="{Binding Password,Mode=OneWayToSource}"/>
                     </Border>
 
+                    <!--Login Button-->
                     <Button
                         Grid.Column="0"
                         Text="Login"
-                        Margin="0,15,0,0"
+                        Margin="{StaticResource VerticalItemSpacing}"
                         MaximumWidthRequest="70"
-                        BackgroundColor="Black"
+                        BackgroundColor="{StaticResource ButtonBgColor}"
                         HorizontalOptions="Start"
                         Clicked="OnLoginClicked"/>
 
-                    <BoxView Margin="0, 15, 0,0"
+                    <BoxView Margin="{StaticResource VerticalItemSpacing}"
                              Color="Black"
                              WidthRequest="300"
                              HeightRequest="1"/>
 
                     <Label
-                        Margin="0, 15, 0,0"
+                        Margin="{StaticResource VerticalItemSpacing}"
                         Text="sign up now"
                         TextColor="white"
                         FontSize="Small"
