@@ -22,7 +22,7 @@ public partial class LoginPage : ContentPage
     /// The current window is replaced with the Sign Up Page
     /// </summary>
     /// <param name="sender"> Label control </param>
-    /// <param name="args"></param>
+    /// <param name="args"K></param>
     private async void OnTapGestureRecognizerTapped(object sender, TappedEventArgs args)
     {
         await Navigation.PushAsync(new SignUpPage(_signUpViewModel));
