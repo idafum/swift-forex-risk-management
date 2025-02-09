@@ -22,6 +22,16 @@
             <Thickness x:Key="VerticalItemSpacing">0,15,0,0</Thickness>
             <Color x:Key="InputBoxColor">White</Color>
             <Color x:Key="ButtonBgColor">Black</Color>
+
+            <Style x:Key="LogoStyle"
+                   TargetType="Image">
+                <Setter Property="VerticalOptions"
+                        Value="End"/>
+                <Setter Property="WidthRequest"
+                        Value="100"/>
+                <Setter Property="HeightRequest"
+                        Value="80"/>
+            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -31,9 +41,7 @@
         <VerticalStackLayout>
             <Image Grid.Row="0"
                    Source="risk2_logo.png"
-                   VerticalOptions="End"
-                   WidthRequest="100"
-                   HeightRequest="100"/>
+                   Style="{StaticResource LogoStyle}"/>
 
             <Border Stroke="Transparent"
                     StrokeShape="RoundRectangle 10,10,10,10"
