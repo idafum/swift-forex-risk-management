@@ -27,7 +27,7 @@ public static class MauiProgram
 
 		//Register Dependencies
 		string dbPath = FileAccessHelper.GetLocalFilePath("risk2.db3");
-		var connection = new SQLiteAsyncConnection(dbPath, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create | SQLiteOpenFlags.FullMutex);
+		SQLiteAsyncConnection connection = new SQLiteAsyncConnection(dbPath, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create | SQLiteOpenFlags.SharedCache | SQLiteOpenFlags.FullMutex);
 
 		builder.Services.AddSingleton(connection);
 		builder.Services.AddSingleton<DatabaseService>();
