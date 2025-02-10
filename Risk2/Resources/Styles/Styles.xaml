@@ -17,18 +17,7 @@
                         Value="Green"/>
         </Style>
 
-        <Style x:Key="AuthField"
-               TargetType="Border">
 
-                <Setter Property="HeightRequest"
-                        Value="50"/>
-                <Setter Property="WidthRequest"
-                        Value="300"/>
-                <Setter Property="StrokeShape"
-                        Value="RoundRectangle 10,10,10,10"/>
-                <Setter Property="BackgroundColor"
-                                Value="White"/>
-        </Style>
         <Style TargetType="ActivityIndicator">
                 <Setter Property="Color"
                         Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}"/>

@@ -22,6 +22,7 @@
             <Thickness x:Key="VerticalItemSpacing">0,15,0,0</Thickness>
             <Color x:Key="InputBoxColor">White</Color>
             <Color x:Key="ButtonBgColor">Black</Color>
+            <x:Double x:Key="fontSize">14</x:Double>
 
             <Style x:Key="LogoStyle"
                    TargetType="Image">
@@ -31,6 +32,32 @@
                         Value="100"/>
                 <Setter Property="HeightRequest"
                         Value="80"/>
+            </Style>
+
+            <Style x:Key="EntryBorder"
+                   TargetType="Border">
+
+                <Setter Property="HeightRequest"
+                        Value="50"/>
+                <Setter Property="WidthRequest"
+                        Value="300"/>
+                <Setter Property="StrokeShape"
+                        Value="RoundRectangle 10,10,10,10"/>
+                <Setter Property="BackgroundColor"
+                        Value="White"/>
+            </Style>
+
+            <Style x:Key="baseLabelStyle"
+                   TargetType="Label">
+                <Setter Property="FontSize"
+                        Value="{StaticResource fontSize}"/>
+            </Style>
+
+            <Style x:Key="signUpLabelStyle"
+                   BasedOn="{StaticResource baseLabelStyle}"
+                   TargetType="Label">
+                <Setter Property="FontAttributes"
+                        Value="Italic"/>
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -49,7 +76,7 @@
 
                 <VerticalStackLayout Padding="15">
                     <!--Username field -->
-                    <Border Style="{StaticResource AuthField}">
+                    <Border Style="{StaticResource EntryBorder}">
                         <Entry Placeholder="Username"
                                BackgroundColor="{StaticResource InputBoxColor}"
                                Text="{Binding Username,Mode=OneWayToSource}"/>
@@ -57,7 +84,7 @@
 
                     <!--Password Field -->
                     <Border Margin="{StaticResource VerticalItemSpacing}"
-                            Style="{StaticResource AuthField}">
+                            Style="{StaticResource EntryBorder}">
                         <Entry Placeholder="Password"
                                IsPassword="True"
                                BackgroundColor="{StaticResource InputBoxColor}"
@@ -79,12 +106,11 @@
                              WidthRequest="300"
                              HeightRequest="1"/>
 
-                    <Label
-                        Margin="{StaticResource VerticalItemSpacing}"
-                        Text="sign up now"
-                        TextColor="white"
-                        FontSize="Small"
-                        HorizontalOptions="Center">
+                    <Label Style="{StaticResource signUpLabelStyle}"
+                           Margin="{StaticResource VerticalItemSpacing}"
+                           Text="sign up now"
+                           TextColor="white"
+                           HorizontalOptions="Center">
 
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnTapGestureRecognizerTapped"
