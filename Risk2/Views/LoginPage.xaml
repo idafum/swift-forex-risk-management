@@ -17,6 +17,50 @@
         </LinearGradientBrush>
     </ContentPage.Background>
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Thickness x:Key="VerticalItemSpacing">0,15,0,0</Thickness>
+            <Color x:Key="InputBoxColor">White</Color>
+            <Color x:Key="ButtonBgColor">Black</Color>
+            <x:Double x:Key="fontSize">14</x:Double>
+
+            <Style x:Key="LogoStyle"
+                   TargetType="Image">
+                <Setter Property="VerticalOptions"
+                        Value="End"/>
+                <Setter Property="WidthRequest"
+                        Value="100"/>
+                <Setter Property="HeightRequest"
+                        Value="80"/>
+            </Style>
+
+            <Style x:Key="EntryBorder"
+                   TargetType="Border">
+
+                <Setter Property="HeightRequest"
+                        Value="50"/>
+                <Setter Property="WidthRequest"
+                        Value="300"/>
+                <Setter Property="StrokeShape"
+                        Value="RoundRectangle 10,10,10,10"/>
+                <Setter Property="BackgroundColor"
+                        Value="White"/>
+            </Style>
+
+            <Style x:Key="baseLabelStyle"
+                   TargetType="Label">
+                <Setter Property="FontSize"
+                        Value="{StaticResource fontSize}"/>
+            </Style>
+
+            <Style x:Key="signUpLabelStyle"
+                   BasedOn="{StaticResource baseLabelStyle}"
+                   TargetType="Label">
+                <Setter Property="FontAttributes"
+                        Value="Italic"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <Grid HorizontalOptions="Center"
           VerticalOptions="Center">
@@ -24,50 +68,49 @@
         <VerticalStackLayout>
             <Image Grid.Row="0"
                    Source="risk2_logo.png"
-                   VerticalOptions="End"
-                   WidthRequest="100"
-                   HeightRequest="100"/>
+                   Style="{StaticResource LogoStyle}"/>
 
             <Border Stroke="Transparent"
                     StrokeShape="RoundRectangle 10,10,10,10"
                     BackgroundColor="Transparent">
 
                 <VerticalStackLayout Padding="15">
-
-                    <Border Style="{StaticResource AuthField}">
+                    <!--Username field -->
+                    <Border Style="{StaticResource EntryBorder}">
                         <Entry Placeholder="Username"
-                               BackgroundColor="white"
+                               BackgroundColor="{StaticResource InputBoxColor}"
                                Text="{Binding Username,Mode=OneWayToSource}"/>
                     </Border>
 
-                    <Border Margin="0, 15, 0, 0"
-                            Style="{StaticResource AuthField}">
+                    <!--Password Field -->
+                    <Border Margin="{StaticResource VerticalItemSpacing}"
+                            Style="{StaticResource EntryBorder}">
                         <Entry Placeholder="Password"
                                IsPassword="True"
-                               BackgroundColor="white"
+                               BackgroundColor="{StaticResource InputBoxColor}"
                                Text="{Binding Password,Mode=OneWayToSource}"/>
                     </Border>
 
+                    <!--Login Button-->
                     <Button
                         Grid.Column="0"
                         Text="Login"
-                        Margin="0,15,0,0"
+                        Margin="{StaticResource VerticalItemSpacing}"
                         MaximumWidthRequest="70"
-                        BackgroundColor="Black"
+                        BackgroundColor="{StaticResource ButtonBgColor}"
                         HorizontalOptions="Start"
                         Clicked="OnLoginClicked"/>
 
-                    <BoxView Margin="0, 15, 0,0"
+                    <BoxView Margin="{StaticResource VerticalItemSpacing}"
                              Color="Black"
                              WidthRequest="300"
                              HeightRequest="1"/>
 
-                    <Label
-                        Margin="0, 15, 0,0"
-                        Text="sign up now"
-                        TextColor="white"
-                        FontSize="Small"
-                        HorizontalOptions="Center">
+                    <Label Style="{StaticResource signUpLabelStyle}"
+                           Margin="{StaticResource VerticalItemSpacing}"
+                           Text="sign up now"
+                           TextColor="white"
+                           HorizontalOptions="Center">
 
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnTapGestureRecognizerTapped"
