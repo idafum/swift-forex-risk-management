@@ -16,18 +16,24 @@ public partial class AccountListViewModel : ObservableObject
 {
     private readonly IPopupService popupService;
 
+    public ObservableCollection<AccountViewModel> Accounts { get; set; } = [];
+
     public AccountListViewModel(IPopupService popupService)
     {
-        AccountList = [];
-
-        AccountList.Add(new Account());
-        AccountList.Add(new Account());
-        AccountList.Add(new Account());
         this.popupService = popupService;
     }
 
-    [ObservableProperty]
-    ObservableCollection<Account> accountList;
+    /// <summary>
+    /// Send request to get user accounts
+    /// </summary>
+    private void PopulateUserAccount()
+    {
+        //TODO:
+        //Send request
+
+        //
+
+    }
 
     /// <summary>
     /// Delete an account from the account List View. 
@@ -37,21 +43,21 @@ public partial class AccountListViewModel : ObservableObject
     [RelayCommand]
     async Task Delete(Account account)
     {
-        if (account != null)
-        {
-            Debug.WriteLine("Account is not null");
-            var currentPage = Shell.Current;
-            if (currentPage != null)
-            {
-                bool answer = await Shell.Current.DisplayAlert("Confirm Delete", "Are you sure you want to delete this account?", "Yes", "No");
-                Debug.WriteLine("Answer: " + answer);
+        // if (account != null)
+        // {
+        //     Debug.WriteLine("Account is not null");
+        //     var currentPage = Shell.Current;
+        //     if (currentPage != null)
+        //     {
+        //         bool answer = await Shell.Current.DisplayAlert("Confirm Delete", "Are you sure you want to delete this account?", "Yes", "No");
+        //         Debug.WriteLine("Answer: " + answer);
 
-                if (answer)
-                {
-                    AccountList.Remove(account);
-                }
-            }
-        }
+        //         if (answer)
+        //         {
+        //             AccountList.Remove(account);
+        //         }
+        //     }
+        // }
     }
 
     /// <summary>
@@ -61,13 +67,13 @@ public partial class AccountListViewModel : ObservableObject
     private async Task CreateAccount()
     {
 
-        var acc = await this.popupService.ShowPopupAsync<CreateAccountViewModel>();
+        // var acc = await this.popupService.ShowPopupAsync<CreateAccountViewModel>();
 
-        //Add new account to account list if valid.
-        if (acc != null && acc is Account newAccount)
-        {
-            AccountList.Add(newAccount);
-        }
+        // //Add new account to account list if valid.
+        // if (acc != null && acc is Account newAccount)
+        // {
+        //     AccountList.Add(newAccount);
+        // }
 
     }
 }
