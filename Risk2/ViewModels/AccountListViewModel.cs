@@ -6,7 +6,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Maui.Controls;
 using Risk2.Backend;
-using Risk2.Model;
+using Risk2.Data.Models;
 using Risk2.Popups;
 using Risk2.Views;
 using System.Collections.ObjectModel;
@@ -84,13 +84,13 @@ public partial class AccountListViewModel : ObservableObject
             if (newAccount == null)
             {
                 //Display UI 'Unable to create new account'. Hint: You cannot create 2 accounts with the same name
+                Debug.WriteLine($"[Failed Account creation] Failed to create account");
             }
             else
             {
                 //Add this new account to the accountListViewModel
                 Accounts.Add(new AccountViewModel(newAccount));
             }
-            Debug.WriteLine($"Account: {accountName}, Balance: {accountBalance}, Currency: {tradingCurrency}, Risk: {risk}");
         }
         else
         {

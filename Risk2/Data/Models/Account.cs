@@ -21,7 +21,7 @@ public class Account
 
     public double Risk { get; set; } = 0.0;
 
-    public int CurrentBalance { get; set; } = 0;
+    public double CurrentBalance { get; set; } = 0;
 
     public double CurrentState { get; set; } = 0.0;
 

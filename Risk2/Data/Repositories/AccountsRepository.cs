@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Risk2.Data.Models;
 using SQLite;
 
@@ -17,8 +18,22 @@ public class AccountsRepository
     /// <param name="UserId"></param>
     /// <param name="account"></param>
     /// <returns></returns>
-    public async Task<bool> AddAccountAsync(int UserId, Account account)
+    public async Task<Account?> AddAccountAsync(Account account)
     {
-        return false;
+        if (_conn == null)
+        {
+            return null;
+        }
+
+        try
+        {
+            int result = await _conn.InsertAsync(account);
+            return result > 0 ? account : null;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"[Database] Failed to add new account: {ex.Message}");
+            return null;
+        }
     }
 }

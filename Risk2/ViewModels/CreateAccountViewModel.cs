@@ -6,7 +6,7 @@ using System.Runtime.ConstrainedExecution;
 using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Risk2.Model;
+
 
 namespace Risk2.ViewModels;
 
