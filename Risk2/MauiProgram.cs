@@ -33,12 +33,17 @@ public static class MauiProgram
 		builder.Services.AddSingleton<DatabaseService>();
 
 
+		//DataRepositories
 		builder.Services.AddSingleton<UserRepository>();
+		builder.Services.AddSingleton<AccountsRepository>();
 
+		//ViewModels
 		builder.Services.AddTransient<SignUpViewModel>();
 		builder.Services.AddTransient<LoginViewModel>(); //New instance created when needed
 
+		//Backend Managers
 		builder.Services.AddSingleton<AuthManager>();
+		builder.Services.AddSingleton<AccountManager>();
 
 		builder.Services.AddSingleton<AccountListPage>();
 		builder.Services.AddSingleton<AccountListViewModel>();

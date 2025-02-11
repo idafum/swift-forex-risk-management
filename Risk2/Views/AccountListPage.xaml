@@ -7,10 +7,11 @@
              xmlns:model="clr-namespace:Risk2.Model"
              xmlns:viewmodel="clr-namespace:Risk2.ViewModels"
              x:DataType="viewmodel:AccountListViewModel">
+
     <Grid RowDefinitions="2*, 0.5*">
 
         <ListView x:Name="list"
-                  ItemsSource="{Binding AccountList}"
+                  ItemsSource="{Binding Accounts}"
                   HasUnevenRows="False"
                   RowHeight="150"
                   Grid.Row="0"
@@ -19,9 +20,8 @@
                   Margin="10">
 
             <ListView.ItemTemplate>
-
-                <DataTemplate x:DataType="model:Account">
-                    <ViewCell>
+                <DataTemplate>
+                    <ViewCell x:DataType="viewmodel:AccountViewModel">
                         <SwipeView>
                             <SwipeView.LeftItems>
                                 <SwipeItems Mode="Reveal">
@@ -39,45 +39,28 @@
                                                Invoked="OnTradeSwipeItemInvoked"/>
                                 </SwipeItems>
                             </SwipeView.RightItems> -->
-
-
-                            <Grid ColumnDefinitions="5*, 2*"
-                                  Margin="5">
-                                <Border Grid.Column="0"
-                                        Padding="5"
-                                        HorizontalOptions="Center"
-                                        VerticalOptions="Center"
-                                        StrokeShape="RoundRectangle 10,10,10,10"
-                                        StrokeThickness="3"
-                                        Stroke="Black"
-                                        WidthRequest="250"
-                                        HeightRequest="100">
-
-                                    <Grid RowDefinitions="*, *"
-                                          ColumnDefinitions="*, *">
-
-                                        <Label Grid.Row="0"
-                                               Grid.Column="0"
-                                               Text="{Binding Name}"
-                                               VerticalOptions="Center"/>
-
-                                        <Label Grid.Row="1"
-                                               Grid.Column="0"
-                                               Text="{Binding AccountSize, StringFormat='{0:C}'}"
-                                               VerticalOptions="Center"/>
-
-                                        <Label Grid.Row="1"
-                                               Grid.Column="1"
-                                               Text="{Binding Risk, StringFormat='{0:P}'}"
-                                               HorizontalOptions="End"
-                                               VerticalOptions="Center"/>
-                                    </Grid>
-                                </Border>
-
-                                <Button Grid.Column="1"
-                                        Text="Edit"
-                                        HorizontalOptions="Center"
+                            <Grid RowDefinitions="*,*,*,*"
+                                  ColumnDefinitions="*,*">
+                                <!-- Menu button -->
+                                <Button Text="..."
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        HorizontalOptions="End"
                                         VerticalOptions="Center"/>
+
+                                <!-- AccountName -->
+                                <Label Text="{Binding AccountName}"
+                                       Grid.Row="1"
+                                       Grid.Column="0"
+                                       HorizontalOptions="Start"
+                                       VerticalOptions="Start"/>
+
+                                <!-- Account Balance -->
+                                <Label Text="{Binding AccountBalance}"
+                                       Grid.Row="2"
+                                       Grid.Column="0"
+                                       HorizontalOptions="Start"
+                                       VerticalOptions="Center"/>
                             </Grid>
 
                         </SwipeView>

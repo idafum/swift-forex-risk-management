@@ -1,5 +1,5 @@
 using CommunityToolkit.Maui.Views;
-using Risk2.Model;
+using Risk2.Data.Models;
 using Risk2.Popups;
 using Risk2.ViewModels;
 

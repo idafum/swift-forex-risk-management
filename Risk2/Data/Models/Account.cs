@@ -17,11 +17,11 @@ public class Account
     [Unique]
     public string AccountName { get; set; } = string.Empty;
 
-    public int InitialBalance { get; set; } = 0;
+    public double InitialBalance { get; set; } = 0;
 
     public double Risk { get; set; } = 0.0;
 
-    public int CurrentBalance { get; set; } = 0;
+    public double CurrentBalance { get; set; } = 0;
 
     public double CurrentState { get; set; } = 0.0;
 

@@ -6,7 +6,7 @@
                x:DataType="viewModels:CreateAccountViewModel">
 
 
-    <ContentView HeightRequest="400"
+    <ContentView HeightRequest="500"
                  WidthRequest="300"
                  BackgroundColor="White"
                  Padding="20">
@@ -31,7 +31,7 @@
                         <Label Text="Name"/>
                         <Entry x:Name="AccountNameEntry"
                                Placeholder="5-10 characters"
-                               Text="{Binding NewAccount.Name}"
+                               Text="{Binding AccountName}"
                                Keyboard="Text"/>
                     </VerticalStackLayout>
 
@@ -39,15 +39,23 @@
                         <Label Text="Balance"/>
                         <Entry x:Name="AccountBalanceEntry"
                                Placeholder="10000"
-                               Text="{Binding NewAccount.AccountSize}"
+                               Text="{Binding AccountBalance}"
                                Keyboard="Numeric"/>
+                    </VerticalStackLayout>
+
+
+                    <VerticalStackLayout>
+                        <Label Text="Currency"/>
+                        <Entry Placeholder="USD, CAD"
+                               Text="{Binding TradingCurrency}"
+                               Keyboard="Text"/>
                     </VerticalStackLayout>
 
                     <VerticalStackLayout>
                         <Label Text="Risk %"/>
                         <Entry x:Name="RiskEntry"
                                Placeholder="2"
-                               Text="{Binding NewAccount.Risk}"
+                               Text="{Binding Risk}"
                                Keyboard="Numeric"/>
                     </VerticalStackLayout>
 

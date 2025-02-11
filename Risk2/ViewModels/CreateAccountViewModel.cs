@@ -1,11 +1,12 @@
 /* This Viewmodel combines the Create Account View and the Account model
     It creates a new account object and returs that object to the calling viewmodel
 */
+using System.Runtime.CompilerServices;
 using System.Runtime.ConstrainedExecution;
 using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Risk2.Model;
+
 
 namespace Risk2.ViewModels;
 
@@ -13,13 +14,28 @@ public partial class CreateAccountViewModel : ObservableObject
 {
 
     [ObservableProperty]
-    Account newAccount = new();
+    string accountName;
+
+    [ObservableProperty]
+    double accountBalance;
+
+    [ObservableProperty]
+    string tradingCurrency;
+
+    [ObservableProperty]
+    double risk;
+
 
     readonly IPopupService popupService;
 
     public CreateAccountViewModel(IPopupService popupService)
     {
         this.popupService = popupService;
+
+        AccountName = "";
+        AccountBalance = 0;
+        TradingCurrency = "USD";
+        Risk = 2;
     }
 
     /// <summary>
@@ -28,8 +44,12 @@ public partial class CreateAccountViewModel : ObservableObject
     [RelayCommand(CanExecute = nameof(IsValidated))]
     private void Done()
     {
-        //validate
-        popupService.ClosePopup(NewAccount);
+        //TODO
+        //Handle Entry Validation
+
+        //Close the popup, returning a tuple of account information
+        var newAccountInfo = (AccountName, AccountBalance, TradingCurrency, Risk);
+        popupService.ClosePopup(newAccountInfo);
     }
 
     /// <summary>

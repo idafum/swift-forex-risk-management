@@ -5,29 +5,41 @@ using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Maui.Controls;
-using Risk2.Model;
+using Risk2.Backend;
+using Risk2.Data.Models;
 using Risk2.Popups;
 using Risk2.Views;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 namespace Risk2.ViewModels;
 public partial class AccountListViewModel : ObservableObject
 {
     private readonly IPopupService popupService;
+    private readonly AccountManager _accountManager;
 
-    public AccountListViewModel(IPopupService popupService)
+    public ObservableCollection<AccountViewModel> Accounts { get; set; } = [];
+
+    public AccountListViewModel(IPopupService popupService, AccountManager accountManager) //DI
     {
-        AccountList = [];
-
-        AccountList.Add(new Account());
-        AccountList.Add(new Account());
-        AccountList.Add(new Account());
         this.popupService = popupService;
+        _accountManager = accountManager;
+
+        int userId = Preferences.Get("userId", -1);
     }
 
-    [ObservableProperty]
-    ObservableCollection<Account> accountList;
+    /// <summary>
+    /// Send request to get user accounts
+    /// </summary>
+    private void PopulateUserAccount()
+    {
+        //TODO:
+        //Send request
+
+        //
+
+    }
 
     /// <summary>
     /// Delete an account from the account List View. 
@@ -37,21 +49,21 @@ public partial class AccountListViewModel : ObservableObject
     [RelayCommand]
     async Task Delete(Account account)
     {
-        if (account != null)
-        {
-            Debug.WriteLine("Account is not null");
-            var currentPage = Shell.Current;
-            if (currentPage != null)
-            {
-                bool answer = await Shell.Current.DisplayAlert("Confirm Delete", "Are you sure you want to delete this account?", "Yes", "No");
-                Debug.WriteLine("Answer: " + answer);
+        // if (account != null)
+        // {
+        //     Debug.WriteLine("Account is not null");
+        //     var currentPage = Shell.Current;
+        //     if (currentPage != null)
+        //     {
+        //         bool answer = await Shell.Current.DisplayAlert("Confirm Delete", "Are you sure you want to delete this account?", "Yes", "No");
+        //         Debug.WriteLine("Answer: " + answer);
 
-                if (answer)
-                {
-                    AccountList.Remove(account);
-                }
-            }
-        }
+        //         if (answer)
+        //         {
+        //             AccountList.Remove(account);
+        //         }
+        //     }
+        // }
     }
 
     /// <summary>
@@ -61,13 +73,36 @@ public partial class AccountListViewModel : ObservableObject
     private async Task CreateAccount()
     {
 
-        var acc = await this.popupService.ShowPopupAsync<CreateAccountViewModel>();
+        var accountInfo = await popupService.ShowPopupAsync<CreateAccountViewModel>();
 
-        //Add new account to account list if valid.
-        if (acc != null && acc is Account newAccount)
+        //Pattern Matching    
+        if (accountInfo is (string accountName, double accountBalance, string tradingCurrency, double risk))
         {
-            AccountList.Add(newAccount);
+            //Send info to the accountManager
+            var newAccount = await _accountManager.HandleAddAccountRequest(accountName, tradingCurrency, accountBalance, risk);
+
+            if (newAccount == null)
+            {
+                //Display UI 'Unable to create new account'. Hint: You cannot create 2 accounts with the same name
+                Debug.WriteLine($"[Failed Account creation] Failed to create account");
+            }
+            else
+            {
+                //Add this new account to the accountListViewModel
+                Accounts.Add(new AccountViewModel(newAccount));
+            }
         }
+        else
+        {
+            Debug.WriteLine("Error: Unexpected return type from ShowPopupAsync.");
+        }
+
+        //Debug.WriteLine(info._accountName);
+        // //Add new account to account list if valid.
+        // if (acc != null && acc is Account newAccount)
+        // {
+        //     AccountList.Add(newAccount);
+        // }
 
     }
 }
