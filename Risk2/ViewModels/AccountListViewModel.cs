@@ -5,26 +5,28 @@ using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Maui.Controls;
+using Risk2.Backend;
 using Risk2.Model;
 using Risk2.Popups;
 using Risk2.Views;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 namespace Risk2.ViewModels;
 public partial class AccountListViewModel : ObservableObject
 {
     private readonly IPopupService popupService;
+    private readonly AccountManager _accountManager;
 
     public ObservableCollection<AccountViewModel> Accounts { get; set; } = [];
 
-    public AccountListViewModel(IPopupService popupService)
+    public AccountListViewModel(IPopupService popupService, AccountManager accountManager) //DI
     {
         this.popupService = popupService;
+        _accountManager = accountManager;
 
         int userId = Preferences.Get("userId", -1);
-        //Print Saved Preference
-        Debug.WriteLine($"[Preferences] User {userId} is logged on");
     }
 
     /// <summary>
@@ -71,8 +73,31 @@ public partial class AccountListViewModel : ObservableObject
     private async Task CreateAccount()
     {
 
-        var acc = await this.popupService.ShowPopupAsync<CreateAccountViewModel>();
+        var accountInfo = await popupService.ShowPopupAsync<CreateAccountViewModel>();
 
+        //Pattern Matching    
+        if (accountInfo is (string accountName, double accountBalance, string tradingCurrency, double risk))
+        {
+            //Send info to the accountManager
+            var newAccount = await _accountManager.HandleAddAccountRequest(accountName, tradingCurrency, accountBalance, risk);
+
+            if (newAccount == null)
+            {
+                //Display UI 'Unable to create new account'. Hint: You cannot create 2 accounts with the same name
+            }
+            else
+            {
+                //Add this new account to the accountListViewModel
+                Accounts.Add(new AccountViewModel(newAccount));
+            }
+            Debug.WriteLine($"Account: {accountName}, Balance: {accountBalance}, Currency: {tradingCurrency}, Risk: {risk}");
+        }
+        else
+        {
+            Debug.WriteLine("Error: Unexpected return type from ShowPopupAsync.");
+        }
+
+        //Debug.WriteLine(info._accountName);
         // //Add new account to account list if valid.
         // if (acc != null && acc is Account newAccount)
         // {

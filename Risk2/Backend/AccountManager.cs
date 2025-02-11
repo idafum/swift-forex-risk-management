@@ -17,7 +17,7 @@ public class AccountManager
     /// Communicate with database to add a new account for a user
     /// </summary>
     /// <returns></returns>
-    public async Task<bool> HandleAddAccountRequest(string accountName, string tradingCurrency, double initialBalance, double risk)
+    public async Task<Account> HandleAddAccountRequest(string accountName, string tradingCurrency, double initialBalance, double risk)
     {
         //Create a new account entity and set the values
         Account newAccount = new()
@@ -34,6 +34,6 @@ public class AccountManager
         // {
         //     Debug.WriteLine($"[Account Manager]: Failed to add new account");
         // }
-        return false;
+        return null;
     }
 }

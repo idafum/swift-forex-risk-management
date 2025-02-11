@@ -1,6 +1,7 @@
 /* This Viewmodel combines the Create Account View and the Account model
     It creates a new account object and returs that object to the calling viewmodel
 */
+using System.Runtime.CompilerServices;
 using System.Runtime.ConstrainedExecution;
 using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -43,8 +44,12 @@ public partial class CreateAccountViewModel : ObservableObject
     [RelayCommand(CanExecute = nameof(IsValidated))]
     private void Done()
     {
-        //validate
-        //popupService.ClosePopup(NewAccount);
+        //TODO
+        //Handle Entry Validation
+
+        //Close the popup, returning a tuple of account information
+        var newAccountInfo = (AccountName, AccountBalance, TradingCurrency, Risk);
+        popupService.ClosePopup(newAccountInfo);
     }
 
     /// <summary>
