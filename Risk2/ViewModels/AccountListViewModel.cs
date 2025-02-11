@@ -1,5 +1,6 @@
 
 
+using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -84,12 +85,16 @@ public partial class AccountListViewModel : ObservableObject
             if (newAccount == null)
             {
                 //Display UI 'Unable to create new account'. Hint: You cannot create 2 accounts with the same name
-                Debug.WriteLine($"[Failed Account creation] Failed to create account");
+                var toast = Toast.Make("Failed! Try again", ToastDuration.Short, 14);
+                await toast.Show();
             }
             else
             {
                 //Add this new account to the accountListViewModel
                 Accounts.Add(new AccountViewModel(newAccount));
+                var toast = Toast.Make("Account created successfully", ToastDuration.Short, 14);
+
+                await toast.Show();
             }
         }
         else
