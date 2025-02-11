@@ -13,13 +13,28 @@ public partial class CreateAccountViewModel : ObservableObject
 {
 
     [ObservableProperty]
-    Account newAccount = new();
+    string accountName;
+
+    [ObservableProperty]
+    double accountBalance;
+
+    [ObservableProperty]
+    string tradingCurrency;
+
+    [ObservableProperty]
+    double risk;
+
 
     readonly IPopupService popupService;
 
     public CreateAccountViewModel(IPopupService popupService)
     {
         this.popupService = popupService;
+
+        AccountName = "";
+        AccountBalance = 0;
+        TradingCurrency = "USD";
+        Risk = 2;
     }
 
     /// <summary>
@@ -29,7 +44,7 @@ public partial class CreateAccountViewModel : ObservableObject
     private void Done()
     {
         //validate
-        popupService.ClosePopup(NewAccount);
+        //popupService.ClosePopup(NewAccount);
     }
 
     /// <summary>

@@ -21,6 +21,10 @@ public partial class AccountListViewModel : ObservableObject
     public AccountListViewModel(IPopupService popupService)
     {
         this.popupService = popupService;
+
+        int userId = Preferences.Get("userId", -1);
+        //Print Saved Preference
+        Debug.WriteLine($"[Preferences] User {userId} is logged on");
     }
 
     /// <summary>
@@ -67,7 +71,7 @@ public partial class AccountListViewModel : ObservableObject
     private async Task CreateAccount()
     {
 
-        // var acc = await this.popupService.ShowPopupAsync<CreateAccountViewModel>();
+        var acc = await this.popupService.ShowPopupAsync<CreateAccountViewModel>();
 
         // //Add new account to account list if valid.
         // if (acc != null && acc is Account newAccount)

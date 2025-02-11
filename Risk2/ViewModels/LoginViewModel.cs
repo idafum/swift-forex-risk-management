@@ -37,6 +37,9 @@ public partial class LoginViewModel : ObservableObject
             {
                 if (Application.Current != null)
                 {
+                    //Store the UserId in Preferences
+                    Preferences.Set("userId", user.Id);
+
                     //Single window application.
                     Application.Current.Windows[0].Page = new AppShell();
                 }
