@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Security.Cryptography;
 using Risk2.Data.Models;
 using SQLite;
 
@@ -33,6 +34,37 @@ public class AccountsRepository
         {
             Debug.WriteLine($"[Database] Failed to add new account: {ex.Message}");
             return null;
+        }
+    }
+
+    /// <summary>
+    /// Queries the database to get a list of user accounts
+    /// </summary>
+    /// <param name="userId">user Id</param>
+    /// <returns>A list of User accounts</returns>
+    public async Task<List<Account>> GetUserAccountsAsync(int userId)
+    {
+        if (_conn == null)
+        {
+            Debug.WriteLine($"[Database] Connection Error");
+            return []; //Empty list
+        }
+        try
+        {
+            var accounts = await _conn.Table<Account>()
+                                    .Where(a => a.OwnerID == userId)
+                                    .ToListAsync();
+
+            if (accounts.Count == 0)
+            {
+                Debug.WriteLine($"[Database] No accounts found for User ID: {userId}");
+            }
+            return accounts;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"[SQLite] Error getting user accounts: {ex.Message}");
+            return [];
         }
     }
 }

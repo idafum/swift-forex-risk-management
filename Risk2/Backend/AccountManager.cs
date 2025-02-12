@@ -40,4 +40,18 @@ public class AccountManager
 
         return account;
     }
+
+    /// <summary>
+    /// GetAccountsHandler
+    /// 
+    /// Communicate with the data base to get a user accounts;
+    /// </summary>
+    /// <param name="userId">userId</param>
+    /// <returns>A list of User accounts</returns>
+    public async Task<List<Account>> HandleGetAccountsRequest(int userId)
+    {
+        List<Account> accountList = await _accountRepo.GetUserAccountsAsync(userId);
+
+        return accountList;
+    }
 }

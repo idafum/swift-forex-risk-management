@@ -14,6 +14,7 @@ using System.Collections.ObjectModel;
 using System.Data;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 namespace Risk2.ViewModels;
 public partial class AccountListViewModel : ObservableObject
 {
@@ -28,17 +29,22 @@ public partial class AccountListViewModel : ObservableObject
         _accountManager = accountManager;
 
         int userId = Preferences.Get("userId", -1);
+        Task.Run(PopulateUserAccount);
     }
 
     /// <summary>
     /// Send request to get user accounts
     /// </summary>
-    private void PopulateUserAccount()
+    private async Task PopulateUserAccount()
     {
-        //TODO:
-        //Send request
+        Accounts.Clear(); //Clear existing accounts;
 
-        //
+        //Send request
+        var accountList = await _accountManager.HandleGetAccountsRequest(Preferences.Get("userId", -1));
+        foreach (var account in accountList)
+        {
+            Accounts.Add(new AccountViewModel(account));
+        }
 
     }
 
