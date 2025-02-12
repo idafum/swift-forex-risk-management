@@ -24,7 +24,6 @@ public class AccountsRepository
         {
             return null;
         }
-
         try
         {
             int result = await _conn.InsertAsync(account);

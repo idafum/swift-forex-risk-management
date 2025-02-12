@@ -44,8 +44,8 @@ public partial class CreateAccountViewModel : ObservableObject
     [RelayCommand(CanExecute = nameof(IsValidated))]
     private void Done()
     {
-        //TODO
-        //Handle Entry Validation
+        //TODO..
+        //Handle Entry Validation in IsValidated 
 
         //Close the popup, returning a tuple of account information
         var newAccountInfo = (AccountName, AccountBalance, TradingCurrency, Risk);
@@ -61,6 +61,7 @@ public partial class CreateAccountViewModel : ObservableObject
     /// <returns></returns>
     private bool IsValidated()
     {
+        //Handle Entry Validation
         return true;
     }
 
