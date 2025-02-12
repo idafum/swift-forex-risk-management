@@ -24,15 +24,18 @@ public class AccountManager
         {
             OwnerID = Preferences.Get("userId", -1),
 
+            //Database sets the Account ID
+
             TradingCurrency = tradingCurrency,
             AccountName = accountName,
             InitialBalance = initialBalance,
             Risk = risk,
             CurrentBalance = initialBalance,
+
+            //The current state is 0.0 at account creation
+            CurrentState = 0.0 //BaseLine
         };
 
-        //TODO
-        //Set the Current State. 
         Account? account = await _accountRepo.AddAccountAsync(newAccount);
 
         return account;

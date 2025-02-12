@@ -74,7 +74,7 @@ public partial class AccountListViewModel : ObservableObject
     private async Task CreateAccount()
     {
 
-        var accountInfo = await popupService.ShowPopupAsync<CreateAccountViewModel>();
+        var accountInfo = await popupService.ShowPopupAsync<CreateAccountViewModel>(); //New Account Info returned
 
         //Pattern Matching    
         if (accountInfo is (string accountName, double accountBalance, string tradingCurrency, double risk))
@@ -92,8 +92,9 @@ public partial class AccountListViewModel : ObservableObject
             {
                 //Add this new account to the accountListViewModel
                 Accounts.Add(new AccountViewModel(newAccount));
-                var toast = Toast.Make("Account created successfully", ToastDuration.Short, 14);
 
+                //Display UI for account confirmation.
+                var toast = Toast.Make("Account created successfully", ToastDuration.Short, 14);
                 await toast.Show();
             }
         }
