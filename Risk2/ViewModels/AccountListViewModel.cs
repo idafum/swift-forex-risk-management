@@ -5,6 +5,7 @@ using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using HealthKit;
 using Microsoft.Maui.Controls;
 using Risk2.Backend;
 using Risk2.Data.Models;
@@ -49,28 +50,40 @@ public partial class AccountListViewModel : ObservableObject
     }
 
     /// <summary>
+    /// This method is called from the OnDeleteAccount Event Handler
+    /// 
     /// Delete an account from the account List View. 
     /// </summary>
-    /// <param name="account"></param>
+    /// <param name="accountView">The viewmodel that controls the account to be deleted</param>
     /// <returns></returns>
-    [RelayCommand]
-    async Task Delete(Account account)
+    public async Task OnDeleteAccountInvoked(AccountViewModel accountView)
     {
-        // if (account != null)
-        // {
-        //     Debug.WriteLine("Account is not null");
-        //     var currentPage = Shell.Current;
-        //     if (currentPage != null)
-        //     {
-        //         bool answer = await Shell.Current.DisplayAlert("Confirm Delete", "Are you sure you want to delete this account?", "Yes", "No");
-        //         Debug.WriteLine("Answer: " + answer);
 
-        //         if (answer)
-        //         {
-        //             AccountList.Remove(account);
-        //         }
-        //     }
-        // }
+        if (accountView != null)
+        {
+            bool answer = await Shell.Current.DisplayAlert("Confirm Delete", "Are you sure you want to delete this account?", "Yes", "No");
+            if (answer)
+            {
+                //We query the db to remove the accounts controlled by the view model
+                bool result = await _accountManager.HandleDeleteAccountRequest(accountView.Id);
+
+                //We wait for confirmation 
+                if (result)
+                {
+                    Accounts.Remove(accountView);
+
+                    var toast = Toast.Make($"Account {accountView.AccountName} has been deleted");
+                    await toast.Show();
+                }
+                else
+                {
+                    //Display Toast
+                    var toast = Toast.Make("Failed to delete account", ToastDuration.Short, 14);
+                    await toast.Show();
+
+                }
+            }
+        }
     }
 
     /// <summary>
@@ -108,13 +121,6 @@ public partial class AccountListViewModel : ObservableObject
         {
             Debug.WriteLine("Error: Unexpected return type from ShowPopupAsync.");
         }
-
-        //Debug.WriteLine(info._accountName);
-        // //Add new account to account list if valid.
-        // if (acc != null && acc is Account newAccount)
-        // {
-        //     AccountList.Add(newAccount);
-        // }
 
     }
 }

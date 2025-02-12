@@ -15,10 +15,13 @@ public partial class AccountViewModel : ObservableObject
     [ObservableProperty]
     double status;
 
+    public int Id { get; init; }
+
     public AccountViewModel(Account account)
     {
         accountName = account.AccountName;
         accountBalance = account.CurrentBalance;
         status = account.CurrentState;
+        Id = account.AccountID; //Init set
     }
 }

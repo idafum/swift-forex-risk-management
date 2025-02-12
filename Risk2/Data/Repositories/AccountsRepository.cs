@@ -67,4 +67,30 @@ public class AccountsRepository
             return [];
         }
     }
+
+    /// <summary>
+    /// Queries the database to delete an account
+    /// </summary>
+    /// <param name="accountId">account id</param>
+    /// <returns>true if account was deleted and false if not</returns>
+    public async Task<bool> DeleteAccount(int accountId)
+    {
+        if (_conn == null)
+        {
+            Debug.WriteLine($"[Database] Connection Error");
+            return false;
+        }
+        try
+        {
+            int result = 0;
+            result = await _conn.DeleteAsync<Account>(accountId);
+
+            return result > 0;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"[SQLite] Error deleting account {accountId}: {ex.Message}");
+            return false;
+        }
+    }
 }

@@ -20,8 +20,8 @@
                   Margin="10">
 
             <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell x:DataType="viewmodel:AccountViewModel">
+                <DataTemplate x:DataType="viewmodel:AccountViewModel">
+                    <ViewCell>
                         <SwipeView ios:SwipeView.SwipeTransitionMode="Drag">
                             <SwipeView.LeftItems>
                                 <SwipeItems Mode="Reveal">

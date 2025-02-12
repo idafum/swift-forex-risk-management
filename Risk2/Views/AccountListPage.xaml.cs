@@ -17,17 +17,17 @@ public partial class AccountListPage : ContentPage
 
     /// <summary>
     /// Event Handler
-    /// Invoked when list item is swiped right.
+    /// Fired when list item is swiped right.
     /// 
     /// It calls the OnDeleteAccountInvoked in the view model
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    private void OnDeleteAccount(object sender, EventArgs e)
+    private async void OnDeleteAccount(object sender, EventArgs e)
     {
-        if (sender is SwipeItem swipeItem && swipeItem.BindingContext is Account account)
+        if (sender is SwipeItem swipeItem && swipeItem.BindingContext is AccountViewModel accountView)
         {
-            _viewModel.DeleteCommand.Execute(account);
+            await _viewModel.OnDeleteAccountInvoked(accountView);
         }
     }
 }
