@@ -22,7 +22,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell x:DataType="viewmodel:AccountViewModel">
-                        <SwipeView>
+                        <SwipeView ios:SwipeView.SwipeTransitionMode="Drag">
                             <SwipeView.LeftItems>
                                 <SwipeItems Mode="Reveal">
                                     <SwipeItem

@@ -15,6 +15,14 @@ public partial class AccountListPage : ContentPage
         BindingContext = _viewModel;
     }
 
+    /// <summary>
+    /// Event Handler
+    /// Invoked when list item is swiped right.
+    /// 
+    /// It calls the OnDeleteAccountInvoked in the view model
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void OnDeleteAccount(object sender, EventArgs e)
     {
         if (sender is SwipeItem swipeItem && swipeItem.BindingContext is Account account)
