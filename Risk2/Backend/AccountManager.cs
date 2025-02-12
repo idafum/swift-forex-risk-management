@@ -24,7 +24,7 @@ public class AccountManager
         {
             OwnerID = Preferences.Get("userId", -1),
 
-            //Database sets the Account ID
+
 
             TradingCurrency = tradingCurrency,
             AccountName = accountName,
@@ -36,8 +36,37 @@ public class AccountManager
             CurrentState = 0.0 //BaseLine
         };
 
+        //Database sets the Account ID
         Account? account = await _accountRepo.AddAccountAsync(newAccount);
 
         return account;
+    }
+
+    /// <summary>
+    /// GetAccountsHandler
+    /// 
+    /// Communicate with the data base to get a user accounts;
+    /// </summary>
+    /// <param name="userId">userId</param>
+    /// <returns>A list of User accounts</returns>
+    public async Task<List<Account>> HandleGetAccountsRequest(int userId)
+    {
+        List<Account> accountList = await _accountRepo.GetUserAccountsAsync(userId);
+
+        return accountList;
+    }
+
+    /// <summary>
+    /// Delete Account Handler
+    /// 
+    /// Communicate with the database to delete an account
+    /// </summary>
+    /// <param name="accountId"> account ID</param>
+    /// <returns>true if account was deleted and false if not</returns>
+    public async Task<bool> HandleDeleteAccountRequest(int accountId)
+    {
+        bool result = await _accountRepo.DeleteAccount(accountId);
+
+        return result;
     }
 }
